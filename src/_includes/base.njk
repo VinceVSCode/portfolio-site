@@ -1,0 +1,56 @@
+{%- set root = page.url | rootPath -%}
+{%- set pageDescription = description or summary or site.description -%}
+{%- set pageTitle = (title + " | " + site.name) if title else site.name -%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' https://api.github.com; img-src 'self' data:; object-src 'none'; base-uri 'self'; form-action 'none'{% if notFound %}; script-src 'self' '{{ notFoundScriptHash }}'{% endif %}">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  {%- if isPreview or notFound %}
+  <meta name="robots" content="noindex">
+  {%- endif %}
+  <title>{{ pageTitle }}</title>
+  <meta name="description" content="{{ pageDescription }}">
+  <meta property="og:title" content="{{ pageTitle }}">
+  <meta property="og:description" content="{{ pageDescription }}">
+  <meta property="og:type" content="{{ 'article' if layout == 'case-study.njk' else 'website' }}">
+  <meta property="og:site_name" content="{{ site.name }}">
+  <link rel="stylesheet" href="{{ root }}assets/css/site.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="site-name" href="{{ root }}">{{ site.name }}</a>
+      <nav aria-label="Main">
+        <ul class="nav-list">
+          <li><a href="{{ root }}"{% if page.url == "/" %} aria-current="page"{% endif %}>Home</a></li>
+          <li><a href="{{ root }}projects/"{% if page.url == "/projects/" %} aria-current="page"{% endif %}>Projects</a></li>
+          <li><a href="{{ root }}demos/"{% if page.url == "/demos/" %} aria-current="page"{% endif %}>Demos</a></li>
+          <li><a href="{{ root }}{{ site.cvFile }}" download>CV (PDF)</a></li>
+          <li><a href="{{ root }}#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="wrap">
+    {{ content | safe }}
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>&copy; {{ site.name }}. Code licence: {{ site.codeLicence }}. Content licence: {{ site.contentLicence }}.</p>
+      <p>This site uses no trackers and no analytics.</p>
+    </div>
+  </footer>
+  {%- if notFound %}
+  <script>{{ notFoundScript | safe }}</script>
+  {%- endif %}
+  {%- for script in scripts %}
+  <script type="module" src="{{ root }}assets/js/{{ script }}"></script>
+  {%- endfor %}
+</body>
+</html>

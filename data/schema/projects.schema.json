@@ -1,0 +1,22 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Projects (data/projects.json)",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": ["slug", "title", "summary", "category", "tags", "featured", "caseStudy", "codeUrl"],
+    "properties": {
+      "slug": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" },
+      "title": { "type": "string", "minLength": 1 },
+      "summary": { "type": "string", "minLength": 1, "maxLength": 200 },
+      "category": { "type": "string", "minLength": 1 },
+      "tags": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "string", "minLength": 1 } },
+      "featured": { "type": "boolean", "description": "Show on the home page." },
+      "caseStudy": { "type": "boolean", "description": "True if content/projects/<slug>.md exists." },
+      "demo": { "type": "string", "description": "Slug of an entry in data/demos.json." },
+      "repo": { "type": "string", "description": "GitHub repository name, used to add live GitHub data to the card." },
+      "codeUrl": { "type": "string", "minLength": 1, "description": "Full URL of the source repository." }
+    }
+  }
+}

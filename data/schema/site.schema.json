@@ -1,0 +1,21 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Site and owner details (data/site.json)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["name", "headline", "bio", "description", "email", "githubUsername", "linkedinUrl", "cvFile", "codeLicence", "contentLicence"],
+  "properties": {
+    "name": { "type": "string", "minLength": 1 },
+    "headline": { "type": "string", "minLength": 1 },
+    "bio": { "type": "string", "minLength": 1, "maxLength": 900 },
+    "description": { "type": "string", "minLength": 1, "maxLength": 300 },
+    "photo": { "type": "string", "description": "Path from the site root. Leave out to show no photo.", "pattern": "^assets/" },
+    "photoAlt": { "type": "string" },
+    "email": { "type": "string", "minLength": 1 },
+    "githubUsername": { "type": "string", "minLength": 1 },
+    "linkedinUrl": { "type": "string", "minLength": 1 },
+    "cvFile": { "type": "string", "pattern": "^assets/files/.+\\.pdf$" },
+    "codeLicence": { "type": "string", "minLength": 1 },
+    "contentLicence": { "type": "string", "minLength": 1 }
+  }
+}

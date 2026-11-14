@@ -1,0 +1,32 @@
+---
+layout: base.njk
+---
+{%- from "macros.njk" import externalLink -%}
+{%- set root = page.url | rootPath -%}
+{%- set project = projects | findBySlug(page.fileSlug) -%}
+<article class="case-study">
+  <p><a href="{{ root }}projects/">&larr; All projects</a></p>
+  <h1>{{ title }}</h1>
+  <p class="lead">{{ summary }}</p>
+  {%- if project %}
+  <ul class="tags" aria-label="Technologies">
+    {%- for tag in project.tags %}
+    <li>{{ tag }}</li>
+    {%- endfor %}
+  </ul>
+  {%- endif %}
+
+  <div class="prose">
+    {{ content | safe }}
+  </div>
+
+  <ul class="card-links case-study-links">
+    <li><a href="{{ root }}projects/">Back to all projects</a></li>
+    {%- if project and project.demo %}
+    <li><a href="{{ root }}demos/{{ project.demo }}/">Try the demo</a></li>
+    {%- endif %}
+    {%- if project %}
+    <li>{{ externalLink(project.codeUrl, "Source repository", title) }}</li>
+    {%- endif %}
+  </ul>
+</article>

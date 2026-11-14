@@ -1,0 +1,21 @@
+{
+  "name": "portfolio-site",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Personal project portfolio website (static, built with Eleventy).",
+  "type": "module",
+  "scripts": {
+    "build": "eleventy",
+    "start": "eleventy --serve",
+    "validate:content": "node scripts/validate-content.mjs",
+    "validate:html": "html-validate \"_site/**/*.html\"",
+    "check:links": "node scripts/check-links.mjs",
+    "check": "npm run validate:content && npm run build && npm run validate:html && npm run check:links"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^3.1.8",
+    "ajv": "^8.20.0",
+    "gray-matter": "^4.0.3",
+    "html-validate": "^11.21.1"
+  }
+}

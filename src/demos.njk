@@ -1,0 +1,32 @@
+---
+layout: base.njk
+permalink: demos/index.html
+title: Demos
+description: Interactive demos that run entirely in your browser.
+---
+{%- from "macros.njk" import externalLink -%}
+{%- set root = page.url | rootPath -%}
+<h1>Demos</h1>
+<p class="lead">Each demo runs entirely in your browser. Nothing is sent to a server.</p>
+
+{%- if demos.length %}
+<ul class="card-grid">
+  {%- for demo in demos %}
+  <li class="card">
+    <h2 class="card-title">{{ demo.title }}</h2>
+    <p>{{ demo.description }}</p>
+    <ul class="tags" aria-label="Technologies">
+      {%- for tech in demo.technology %}
+      <li>{{ tech }}</li>
+      {%- endfor %}
+    </ul>
+    <ul class="card-links">
+      <li><a class="button" href="{{ root }}demos/{{ demo.slug }}/">Launch<span class="visually-hidden">: {{ demo.title }}</span></a></li>
+      <li>{{ externalLink(demo.sourceUrl, "Source code", demo.title) }}</li>
+    </ul>
+  </li>
+  {%- endfor %}
+</ul>
+{%- else %}
+<p>No demos are available yet.</p>
+{%- endif %}

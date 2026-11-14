@@ -1,0 +1,25 @@
+[
+  {
+    "slug": "placeholder-project-one",
+    "title": "[PROJECT ONE TITLE]",
+    "summary": "[PROJECT ONE: one-line summary.]",
+    "category": "[CATEGORY A]",
+    "tags": ["[LANGUAGE A]", "[FRAMEWORK]"],
+    "featured": true,
+    "caseStudy": true,
+    "demo": "sample-sort",
+    "repo": "[REPOSITORY NAME]",
+    "codeUrl": "[REPOSITORY URL]"
+  },
+  {
+    "slug": "placeholder-project-two",
+    "title": "[PROJECT TWO TITLE]",
+    "summary": "[PROJECT TWO: one-line summary.]",
+    "category": "[CATEGORY B]",
+    "tags": ["[LANGUAGE B]", "[TOOL]"],
+    "featured": true,
+    "caseStudy": true,
+    "repo": "[REPOSITORY NAME]",
+    "codeUrl": "[REPOSITORY URL]"
+  }
+]

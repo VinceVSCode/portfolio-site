@@ -1,0 +1,14 @@
+{
+  "name": "[OWNER NAME]",
+  "headline": "[ONE-SENTENCE HEADLINE]",
+  "bio": "[SHORT BIO: up to about 120 words about the owner.]",
+  "description": "[SITE DESCRIPTION: one or two sentences shown in search results.]",
+  "photo": "assets/img/profile-placeholder.svg",
+  "photoAlt": "Placeholder for the owner's profile photo",
+  "email": "[EMAIL ADDRESS]",
+  "githubUsername": "[GITHUB USERNAME]",
+  "linkedinUrl": "[LINKEDIN URL]",
+  "cvFile": "assets/files/cv-placeholder.pdf",
+  "codeLicence": "[CODE LICENCE]",
+  "contentLicence": "[CONTENT LICENCE]"
+}

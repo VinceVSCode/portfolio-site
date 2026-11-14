@@ -1,0 +1,52 @@
+---
+layout: base.njk
+permalink: index.html
+---
+{%- from "macros.njk" import externalLink, projectCard -%}
+{%- set root = page.url | rootPath -%}
+<section class="hero" aria-labelledby="hero-heading">
+  {%- if site.photo %}
+  <img class="hero-photo" src="{{ root }}{{ site.photo }}" alt="{{ site.photoAlt }}" width="160" height="160">
+  {%- endif %}
+  <div>
+    <h1 id="hero-heading">{{ site.name }}</h1>
+    <p class="lead">{{ site.headline }}</p>
+    <p>{{ site.bio }}</p>
+    <p class="hero-actions">
+      <a class="button" href="{{ root }}projects/">See all projects</a>
+      <a class="button button-secondary" href="{{ root }}{{ site.cvFile }}" download>Download CV (PDF)</a>
+    </p>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="featured-heading">
+  <h2 id="featured-heading">Featured projects</h2>
+  <ul class="card-grid">
+    {%- for project in projects %}
+    {%- if project.featured %}
+    {{ projectCard(project, root, 3) }}
+    {%- endif %}
+    {%- endfor %}
+  </ul>
+</section>
+
+<section class="section" id="contact" aria-labelledby="contact-heading">
+  <h2 id="contact-heading">Contact</h2>
+  <ul class="contact-list">
+    <li>
+      {%- if site.email | isPlaceholder -%}
+      <span class="pending">Email: {{ site.email }}</span>
+      {%- else -%}
+      <a href="mailto:{{ site.email }}">Email: {{ site.email }}</a>
+      {%- endif -%}
+    </li>
+    <li>
+      {%- if site.githubUsername | isPlaceholder -%}
+      <span class="pending">GitHub: {{ site.githubUsername }}</span>
+      {%- else -%}
+      {{ externalLink("https://github.com/" + site.githubUsername, "GitHub") }}
+      {%- endif -%}
+    </li>
+    <li>{{ externalLink(site.linkedinUrl, "LinkedIn") }}</li>
+  </ul>
+</section>

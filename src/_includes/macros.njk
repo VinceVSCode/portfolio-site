@@ -1,0 +1,31 @@
+{# External link. Shows plain text while the value is still a placeholder. #}
+{% macro externalLink(url, label, context) -%}
+{%- if url | isPlaceholder -%}
+<span class="pending">{{ label }}: {{ url or "[NOT SET]" }}</span>
+{%- else -%}
+<a href="{{ url }}" target="_blank" rel="noopener noreferrer">{{ label }}{% if context %}<span class="visually-hidden">: {{ context }}</span>{% endif %}</a>
+{%- endif -%}
+{%- endmacro %}
+
+{# Project card, used on the home page and the projects list. #}
+{% macro projectCard(project, root, headingLevel) -%}
+<li class="card" data-terms="{{ project | projectTerms | join('|') }}"{% if not (project.repo | isPlaceholder) %} data-repo="{{ project.repo }}"{% endif %}>
+  <h{{ headingLevel }} class="card-title">{{ project.title }}</h{{ headingLevel }}>
+  <p>{{ project.summary }}</p>
+  <ul class="tags" aria-label="Technologies">
+    {%- for tag in project.tags %}
+    <li>{{ tag }}</li>
+    {%- endfor %}
+  </ul>
+  <p class="gh-meta" hidden></p>
+  <ul class="card-links">
+    {%- if project.caseStudy %}
+    <li><a href="{{ root }}projects/{{ project.slug }}.html">Case study<span class="visually-hidden">: {{ project.title }}</span></a></li>
+    {%- endif %}
+    {%- if project.demo %}
+    <li><a href="{{ root }}demos/{{ project.demo }}/">Demo<span class="visually-hidden">: {{ project.title }}</span></a></li>
+    {%- endif %}
+    <li>{{ externalLink(project.codeUrl, "Code", project.title) }}</li>
+  </ul>
+</li>
+{%- endmacro %}
