@@ -1,5 +1,33 @@
 [
   {
+    "slug": "sd-01-expense-tracker",
+    "id": "sd-01",
+    "title": "Expense Tracker CLI",
+    "summary": "A modular command-line expense tracker with monthly reports and CSV export.",
+    "category": "Software development",
+    "tags": ["Python", "OOP", "Unit Testing", "Git", "CLI design"],
+    "featured": true,
+    "caseStudy": true,
+    "thumbnail": "assets/img/projects/sd-01/thumbnail.png",
+    "thumbnailAlt": "Terminal output of the expense tracker: a list of five expenses and a monthly summary by category.",
+    "repo": "sd-01-expense-tracker",
+    "codeUrl": "https://github.com/VinceVSCode/sd-01-expense-tracker"
+  },
+  {
+    "slug": "ml-01-tabular-prediction",
+    "id": "ml-01",
+    "title": "Tabular Prediction with Exploratory Analysis",
+    "summary": "Predicts whether a person earns above 50K from census data, with three models compared by cross-validation and an error analysis.",
+    "category": "Machine learning",
+    "tags": ["Python", "Pandas", "Exploratory Data Analysis", "scikit-learn", "Cross-Validation", "Feature Engineering"],
+    "featured": true,
+    "caseStudy": true,
+    "thumbnail": "assets/img/projects/ml-01/thumbnail.png",
+    "thumbnailAlt": "Bar chart comparing a baseline and three models on seven metrics. Gradient boosting scores best on six of them.",
+    "repo": "ml-01-tabular-prediction",
+    "codeUrl": "https://github.com/VinceVSCode/ml-01-tabular-prediction"
+  },
+  {
     "slug": "placeholder-project-one",
     "title": "[PROJECT ONE TITLE]",
     "summary": "[PROJECT ONE: one-line summary.]",

@@ -29,7 +29,9 @@
           <li><a href="{{ root }}"{% if page.url == "/" %} aria-current="page"{% endif %}>Home</a></li>
           <li><a href="{{ root }}projects/"{% if page.url == "/projects/" %} aria-current="page"{% endif %}>Projects</a></li>
           <li><a href="{{ root }}demos/"{% if page.url == "/demos/" %} aria-current="page"{% endif %}>Demos</a></li>
+          {%- if site.cvFile %}
           <li><a href="{{ root }}{{ site.cvFile }}" download>CV (PDF)</a></li>
+          {%- endif %}
           <li><a href="{{ root }}#contact">Contact</a></li>
         </ul>
       </nav>

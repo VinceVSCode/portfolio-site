@@ -263,7 +263,8 @@ main.wrap {
   padding: 0;
   display: flex;
   flex-wrap: wrap;
-  gap: 0.75rem 2rem;
+  align-items: center;
+  gap: 0.75rem 1rem;
 }
 
 /* Cards */
@@ -288,6 +289,14 @@ main.wrap {
 
 .card[hidden] {
   display: none;
+}
+
+.card-thumb {
+  display: block;
+  width: 100%;
+  margin-bottom: 1rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
 }
 
 .card-title {
@@ -370,6 +379,27 @@ main.wrap {
 
 .prose h2 {
   margin-top: 2rem;
+}
+
+.prose img {
+  display: block;
+  margin: 1rem 0;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+}
+
+.prose table {
+  display: block;
+  overflow-x: auto;
+  border-collapse: collapse;
+  margin: 1rem 0;
+}
+
+.prose th,
+.prose td {
+  padding: 0.375rem 0.75rem;
+  border: 1px solid var(--color-border);
+  text-align: left;
 }
 
 .prose pre {

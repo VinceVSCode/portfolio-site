@@ -55,6 +55,9 @@ for (const project of projects) {
   if (project.caseStudy && !existsSync(`content/projects/${project.slug}.md`)) {
     errors.push(`data/projects.json: "${project.slug}" has caseStudy true but content/projects/${project.slug}.md is missing`);
   }
+  if (project.thumbnail && !existsSync(project.thumbnail)) {
+    errors.push(`data/projects.json: "${project.slug}" thumbnail "${project.thumbnail}" does not exist`);
+  }
   if (project.demo && !demoSlugs.has(project.demo)) {
     errors.push(`data/projects.json: "${project.slug}" refers to demo "${project.demo}", which is not in data/demos.json`);
   }

@@ -2,7 +2,7 @@
 
 A static personal portfolio website, built with [Eleventy](https://www.11ty.dev/). The full brief is in [requirements.md](requirements.md).
 
-The site currently contains **placeholders** (text in square brackets, such as `[OWNER NAME]`). Replace them before publishing. See "Edit content" below.
+The site still contains some **placeholders** (text in square brackets, such as `[CODE LICENCE]`). Replace them before publishing. See "Edit content" below.
 
 ## Documents
 
@@ -56,9 +56,11 @@ All text you edit lives in `data/` and `content/`. You do not need to touch the 
 Notes:
 
 - **Placeholders.** A value that starts with `[` is treated as "not set". The site shows it as highlighted text and does not turn it into a link.
+- **Bio.** Leave `bio` as an empty string (`""`) to show no bio on the home page.
 - **Photo.** Put the image in `assets/img/` and set `photo` and `photoAlt` in `data/site.json`. Remove the `photo` line to show no photo.
-- **CV.** Put the PDF in `assets/files/` and set `cvFile` in `data/site.json`. Delete `assets/files/cv-placeholder.pdf` afterwards.
+- **CV.** Put the PDF in `assets/files/` and add `"cvFile": "assets/files/<name>.pdf"` to `data/site.json`. While `cvFile` is left out, the site shows no CV link. No CV is set yet.
 - **Add a project.** Add an entry to `data/projects.json`. Set `featured` to `true` to show it on the home page.
+- **Project images.** Put a project's images in `assets/img/projects/<id>/` (for example `assets/img/projects/sd-01/`). To show one on the card, set `thumbnail` to its path and `thumbnailAlt` to a short description. The card image should be 1200×630 pixels. In a case study, link an image as `../assets/img/projects/<id>/<file>`.
 - **Add a case study.** Create `content/projects/<slug>.md`, with the same slug as the project, and set `caseStudy` to `true` on the project. The file needs `title` and `summary` in its front matter and these six headings: `## Problem`, `## Approach`, `## Tech stack`, `## Challenges and solutions`, `## Results`, `## What I learned`. Give every image alt text.
 - **Add a demo.** Create a folder `demos/<slug>/` with its own `index.html`, scripts and styles, and add an entry to `data/demos.json`. Each demo is self-contained. To remove a demo, delete its folder and its entry. `demos/sample-sort/` is a placeholder to copy from.
 - **GitHub data.** Once `githubUsername` is set, the projects page loads your public repositories from the GitHub API in the visitor's browser and caches them for one hour. A project card shows live GitHub data if its `repo` field matches a repository name. If the API is unavailable, the page shows only the data from `data/projects.json`. No access token is used.
