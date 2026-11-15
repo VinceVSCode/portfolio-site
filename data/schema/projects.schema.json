@@ -8,6 +8,9 @@
     "required": ["slug", "title", "summary", "category", "tags", "featured", "caseStudy", "codeUrl"],
     "properties": {
       "slug": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" },
+      "id": { "type": "string", "pattern": "^(sd|ml)-[0-9]{2}$", "description": "The project's id in its portfolio.json (FR-11)." },
+      "thumbnail": { "type": "string", "minLength": 1, "description": "Path of the card image, for example assets/img/projects/sd-01/thumbnail.png. Needs thumbnailAlt." },
+      "thumbnailAlt": { "type": "string", "minLength": 1, "description": "Text alternative for the card image." },
       "title": { "type": "string", "minLength": 1 },
       "summary": { "type": "string", "minLength": 1, "maxLength": 200 },
       "category": { "type": "string", "minLength": 1 },
@@ -17,6 +20,7 @@
       "demo": { "type": "string", "description": "Slug of an entry in data/demos.json." },
       "repo": { "type": "string", "description": "GitHub repository name, used to add live GitHub data to the card." },
       "codeUrl": { "type": "string", "minLength": 1, "description": "Full URL of the source repository." }
-    }
+    },
+    "dependencies": { "thumbnail": ["thumbnailAlt"] }
   }
 }

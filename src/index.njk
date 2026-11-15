@@ -11,10 +11,14 @@ permalink: index.html
   <div>
     <h1 id="hero-heading">{{ site.name }}</h1>
     <p class="lead">{{ site.headline }}</p>
+    {%- if site.bio %}
     <p>{{ site.bio }}</p>
+    {%- endif %}
     <p class="hero-actions">
       <a class="button" href="{{ root }}projects/">See all projects</a>
+      {%- if site.cvFile %}
       <a class="button button-secondary" href="{{ root }}{{ site.cvFile }}" download>Download CV (PDF)</a>
+      {%- endif %}
     </p>
   </div>
 </section>
@@ -44,9 +48,9 @@ permalink: index.html
       {%- if site.githubUsername | isPlaceholder -%}
       <span class="pending">GitHub: {{ site.githubUsername }}</span>
       {%- else -%}
-      {{ externalLink("https://github.com/" + site.githubUsername, "GitHub") }}
+      {{ externalLink("https://github.com/" + site.githubUsername, "GitHub", "", "button button-secondary") }}
       {%- endif -%}
     </li>
-    <li>{{ externalLink(site.linkedinUrl, "LinkedIn") }}</li>
+    <li>{{ externalLink(site.linkedinUrl, "LinkedIn", "", "button button-secondary") }}</li>
   </ul>
 </section>
