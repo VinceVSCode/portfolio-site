@@ -213,6 +213,25 @@ main.wrap {
   color: var(--color-pending-text);
 }
 
+.status {
+  display: inline-block;
+  align-self: flex-start;
+  margin: 0 0 0.75rem;
+  padding: 0.125rem 0.625rem;
+  border-radius: 999px;
+  background: var(--color-pending-bg);
+  color: var(--color-pending-text);
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.empty {
+  padding: 1.5rem;
+  border: 1px dashed var(--color-border);
+  border-radius: var(--radius);
+  background: var(--color-surface);
+}
+
 .tags {
   display: flex;
   flex-wrap: wrap;

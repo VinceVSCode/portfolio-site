@@ -1,5 +1,5 @@
 import { createHash } from "node:crypto";
-import { readFileSync } from "node:fs";
+import { readFileSync, rmSync } from "node:fs";
 
 // Inline script for 404.html. It is inlined because a 404 page can be served
 // at any URL depth, where a relative <script src> would not resolve.
@@ -19,6 +19,15 @@ export default function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("demos");
   eleventyConfig.addPassthroughCopy(".nojekyll");
 
+  // Demos marked "hidden" in data/demos.json are not published.
+  eleventyConfig.on("eleventy.after", ({ directories }) => {
+    for (const demo of JSON.parse(readFileSync("data/demos.json", "utf8"))) {
+      if (demo.hidden) {
+        rmSync(`${directories.output}demos/${demo.slug}`, { recursive: true, force: true });
+      }
+    }
+  });
+
   // PREVIEW=1 marks pull request preview builds (adds noindex, FR-8).
   eleventyConfig.addGlobalData("isPreview", process.env.PREVIEW === "1");
   eleventyConfig.addGlobalData("notFoundScript", notFoundScript);
@@ -34,6 +43,9 @@ export default function (eleventyConfig) {
 
   // True for values the owner has not filled in yet, such as "[EMAIL ADDRESS]".
   eleventyConfig.addFilter("isPlaceholder", isPlaceholder);
+
+  // Entries the owner has not hidden (projects and demos).
+  eleventyConfig.addFilter("visible", (list) => (list || []).filter((item) => !item.hidden));
 
   eleventyConfig.addFilter("findBySlug", (list, slug) =>
     (list || []).find((item) => item.slug === slug)

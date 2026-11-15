@@ -9,9 +9,10 @@ description: Interactive demos that run entirely in your browser.
 <h1>Demos</h1>
 <p class="lead">Each demo runs entirely in your browser. Nothing is sent to a server.</p>
 
-{%- if demos.length %}
+{%- set shown = demos | visible -%}
+{%- if shown.length %}
 <ul class="card-grid">
-  {%- for demo in demos %}
+  {%- for demo in shown %}
   <li class="card">
     <h2 class="card-title">{{ demo.title }}</h2>
     <p>{{ demo.description }}</p>
@@ -28,5 +29,5 @@ description: Interactive demos that run entirely in your browser.
   {%- endfor %}
 </ul>
 {%- else %}
-<p>No demos are available yet.</p>
+<p class="empty">No demos are online yet. A demo will appear here when a project has one that can run in the browser. Until then, the <a href="{{ root }}projects/">projects</a> page shows what each project does.</p>
 {%- endif %}

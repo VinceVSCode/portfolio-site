@@ -8,6 +8,7 @@
   "email": "sarafidis12@gmail.com",
   "githubUsername": "VinceVSCode",
   "linkedinUrl": "https://www.linkedin.com/in/themis-sarafidis-41126a26b/",
-  "codeLicence": "[CODE LICENCE]",
-  "contentLicence": "[CONTENT LICENCE]"
+  "cvFile": "assets/files/themis-sarafidis-cv.pdf",
+  "codeLicence": "MIT",
+  "contentLicence": "CC BY 4.0"
 }

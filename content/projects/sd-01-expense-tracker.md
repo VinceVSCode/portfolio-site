@@ -48,4 +48,4 @@ The full demo session, from the real application:
 
 ## What I learned
 
-[OWNER: write two or three sentences on what you learned and what you would change.]
+This section will be written after the project passes its quality review.
