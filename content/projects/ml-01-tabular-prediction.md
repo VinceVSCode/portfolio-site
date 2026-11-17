@@ -54,4 +54,4 @@ The model misses a high income (32% of them) far more often than it raises a fal
 
 ## What I learned
 
-[OWNER: write two or three sentences on what you learned and what you would change.]
+This section will be written after the project passes its quality review.

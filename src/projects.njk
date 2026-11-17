@@ -9,13 +9,16 @@ scripts:
 ---
 {%- from "macros.njk" import projectCard -%}
 {%- set root = page.url | rootPath -%}
+{%- set shown = projects | visible -%}
 <h1>Projects</h1>
+
+{%- if shown.length %}
 
 <div class="filters" id="project-filters" hidden>
   <p id="filters-label">Filter by technology or category:</p>
   <ul class="filter-list" aria-labelledby="filters-label">
     <li><button type="button" class="filter-button" data-term="" aria-pressed="true">All</button></li>
-    {%- for term in projects | filterTerms %}
+    {%- for term in shown | filterTerms %}
     <li><button type="button" class="filter-button" data-term="{{ term }}" aria-pressed="false">{{ term }}</button></li>
     {%- endfor %}
   </ul>
@@ -23,10 +26,13 @@ scripts:
 </div>
 
 <ul class="card-grid" id="project-list">
-  {%- for project in projects %}
-  {{ projectCard(project, root, 2) }}
+  {%- for project in shown %}
+  {{ projectCard(project, root, 2, demos) }}
   {%- endfor %}
 </ul>
+{%- else %}
+<p class="empty">No projects are published yet. The first ones are on their way, so please check back soon.</p>
+{%- endif %}
 
 <section class="section" id="github-repos" data-github-user="{{ site.githubUsername }}" aria-labelledby="github-heading" hidden>
   <h2 id="github-heading">Recently updated on GitHub</h2>

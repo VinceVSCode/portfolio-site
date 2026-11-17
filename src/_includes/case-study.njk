@@ -8,6 +8,9 @@ layout: base.njk
   <p><a href="{{ root }}projects/">&larr; All projects</a></p>
   <h1>{{ title }}</h1>
   <p class="lead">{{ summary }}</p>
+  {%- if project and project.status %}
+  <p class="status">{{ project.status }}</p>
+  {%- endif %}
   {%- if project %}
   <ul class="tags" aria-label="Technologies">
     {%- for tag in project.tags %}
@@ -22,7 +25,7 @@ layout: base.njk
 
   <ul class="card-links case-study-links">
     <li><a href="{{ root }}projects/">Back to all projects</a></li>
-    {%- if project and project.demo %}
+    {%- if project and project.demo and not (demos | findBySlug(project.demo)).hidden %}
     <li><a href="{{ root }}demos/{{ project.demo }}/">Try the demo</a></li>
     {%- endif %}
     {%- if project %}

@@ -8,6 +8,7 @@
     "required": ["slug", "title", "description", "technology", "sourceUrl"],
     "properties": {
       "slug": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$", "description": "Folder name under demos/." },
+      "hidden": { "type": "boolean", "description": "True to keep the demo off the site: not listed and its folder is not published." },
       "title": { "type": "string", "minLength": 1 },
       "description": { "type": "string", "minLength": 1 },
       "technology": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } },

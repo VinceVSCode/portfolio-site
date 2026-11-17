@@ -25,13 +25,17 @@ permalink: index.html
 
 <section class="section" aria-labelledby="featured-heading">
   <h2 id="featured-heading">Featured projects</h2>
+  {%- set featured = [] %}
+  {%- for project in projects | visible %}{% if project.featured %}{% set featured = (featured.push(project), featured) %}{% endif %}{% endfor %}
+  {%- if featured.length %}
   <ul class="card-grid">
-    {%- for project in projects %}
-    {%- if project.featured %}
-    {{ projectCard(project, root, 3) }}
-    {%- endif %}
+    {%- for project in featured %}
+    {{ projectCard(project, root, 3, demos) }}
     {%- endfor %}
   </ul>
+  {%- else %}
+  <p class="empty">No projects are published yet. The first ones are on their way, so please check back soon.</p>
+  {%- endif %}
 </section>
 
 <section class="section" id="contact" aria-labelledby="contact-heading">

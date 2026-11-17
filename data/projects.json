@@ -8,6 +8,7 @@
     "tags": ["Python", "OOP", "Unit Testing", "Git", "CLI design"],
     "featured": true,
     "caseStudy": true,
+    "status": "Pending quality review",
     "thumbnail": "assets/img/projects/sd-01/thumbnail.png",
     "thumbnailAlt": "Terminal output of the expense tracker: a list of five expenses and a monthly summary by category.",
     "repo": "sd-01-expense-tracker",
@@ -22,6 +23,7 @@
     "tags": ["Python", "Pandas", "Exploratory Data Analysis", "scikit-learn", "Cross-Validation", "Feature Engineering"],
     "featured": true,
     "caseStudy": true,
+    "status": "Pending quality review",
     "thumbnail": "assets/img/projects/ml-01/thumbnail.png",
     "thumbnailAlt": "Bar chart comparing a baseline and three models on seven metrics. Gradient boosting scores best on six of them.",
     "repo": "ml-01-tabular-prediction",
@@ -29,6 +31,7 @@
   },
   {
     "slug": "placeholder-project-one",
+    "hidden": true,
     "title": "[PROJECT ONE TITLE]",
     "summary": "[PROJECT ONE: one-line summary.]",
     "category": "[CATEGORY A]",
@@ -41,6 +44,7 @@
   },
   {
     "slug": "placeholder-project-two",
+    "hidden": true,
     "title": "[PROJECT TWO TITLE]",
     "summary": "[PROJECT TWO: one-line summary.]",
     "category": "[CATEGORY B]",

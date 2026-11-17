@@ -8,12 +8,15 @@
 {%- endmacro %}
 
 {# Project card, used on the home page and the projects list. #}
-{% macro projectCard(project, root, headingLevel) -%}
+{% macro projectCard(project, root, headingLevel, demos) -%}
 <li class="card" data-terms="{{ project | projectTerms | join('|') }}"{% if not (project.repo | isPlaceholder) %} data-repo="{{ project.repo }}"{% endif %}>
   {%- if project.thumbnail %}
   <img class="card-thumb" src="{{ root }}{{ project.thumbnail }}" alt="{{ project.thumbnailAlt }}" width="1200" height="630" loading="lazy">
   {%- endif %}
   <h{{ headingLevel }} class="card-title">{{ project.title }}</h{{ headingLevel }}>
+  {%- if project.status %}
+  <p class="status">{{ project.status }}</p>
+  {%- endif %}
   <p>{{ project.summary }}</p>
   <ul class="tags" aria-label="Technologies">
     {%- for tag in project.tags %}
@@ -25,7 +28,7 @@
     {%- if project.caseStudy %}
     <li><a href="{{ root }}projects/{{ project.slug }}.html">Case study<span class="visually-hidden">: {{ project.title }}</span></a></li>
     {%- endif %}
-    {%- if project.demo %}
+    {%- if project.demo and not (demos | findBySlug(project.demo)).hidden %}
     <li><a href="{{ root }}demos/{{ project.demo }}/">Demo<span class="visually-hidden">: {{ project.title }}</span></a></li>
     {%- endif %}
     <li>{{ externalLink(project.codeUrl, "Code", project.title) }}</li>

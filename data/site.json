@@ -1,13 +1,14 @@
 {
   "name": "Themis Sarafidis",
   "headline": "Code, Bug, Debug, Repeat!",
-  "bio": "",
+  "bio": "Software engineer with experience in backend development, machine learning and API testing. I work mainly in Python and Java, with Docker and GitHub Actions as everyday tools, and I test my projects before I call them finished.",
   "description": "The site is made to demonstrate the projects I've created so far.",
   "photo": "assets/img/profile.jpg",
   "photoAlt": "Portrait of Themis Sarafidis",
   "email": "sarafidis12@gmail.com",
   "githubUsername": "VinceVSCode",
   "linkedinUrl": "https://www.linkedin.com/in/themis-sarafidis-41126a26b/",
-  "codeLicence": "[CODE LICENCE]",
-  "contentLicence": "[CONTENT LICENCE]"
+  "cvFile": "assets/files/themis-sarafidis-cv.pdf",
+  "codeLicence": "MIT",
+  "contentLicence": "CC BY 4.0"
 }

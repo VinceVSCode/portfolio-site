@@ -1,6 +1,7 @@
 [
   {
     "slug": "sample-sort",
+    "hidden": true,
     "title": "[PLACEHOLDER DEMO] Sorting visualiser",
     "description": "Sample demo that animates a bubble sort. It exists to test the demo hub. Replace it with a demo of a real project.",
     "technology": ["JavaScript", "CSS"],
