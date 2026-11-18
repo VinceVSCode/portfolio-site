@@ -63,21 +63,24 @@ export default function (eleventyConfig) {
     (list || []).find((item) => item.slug === slug)
   );
 
-  // Category and technologies of one project, matched by the filter buttons.
-  eleventyConfig.addFilter("projectTerms", (project) => [
-    project.category,
-    ...(project.tags || []),
-  ]);
+  // Technologies of one project, matched by the technology filter buttons.
+  eleventyConfig.addFilter("projectTerms", (project) => project.tags || []);
 
-  // Unique technologies and categories, for the project filter buttons.
+  // Unique technologies, for the technology filter buttons.
   eleventyConfig.addFilter("filterTerms", (projects) => {
     const terms = new Set();
     for (const project of projects || []) {
-      if (project.category) terms.add(project.category);
       for (const tag of project.tags || []) terms.add(tag);
     }
     return [...terms].sort((a, b) => a.localeCompare(b));
   });
+
+  // Unique tracks (categories), for the track filter buttons (FR-11).
+  eleventyConfig.addFilter("trackTerms", (projects) =>
+    [...new Set((projects || []).map((project) => project.category).filter(Boolean))].sort(
+      (a, b) => a.localeCompare(b)
+    )
+  );
 
   // Folder settings. Source lives in "." and the built site goes to _site/.
   // Pages (.njk, .md) are templates; Markdown is not run through Nunjucks, but

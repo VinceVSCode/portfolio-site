@@ -15,13 +15,14 @@
 {%- endmacro %}
 
 {# Project card, used on the home page and the projects list.
-   project: one entry from data/projects.json; root: path back to site root;
+   project: one entry from the catalog (data/projects.json merged with the
+   GitHub manifests, see data/catalog.js); root: path back to site root;
    headingLevel: 2 or 3, so headings nest correctly on each page;
    demos: the demos list, used to hide a demo link when that demo is hidden.
-   data-terms feeds the filter buttons (assets/js/filters.js). data-repo links
+   data-track and data-terms feed the filter buttons (assets/js/filters.js). data-repo links
    the card to a GitHub repository (assets/js/github.js). #}
 {% macro projectCard(project, root, headingLevel, demos) -%}
-<li class="card" data-terms="{{ project | projectTerms | join('|') }}"{% if not (project.repo | isPlaceholder) %} data-repo="{{ project.repo }}"{% endif %}>
+<li class="card" data-track="{{ project.category }}" data-terms="{{ project | projectTerms | join('|') }}"{% if not (project.repo | isPlaceholder) %} data-repo="{{ project.repo }}"{% endif %}>
   {%- if project.thumbnail %}
   <img class="card-thumb" src="{{ root }}{{ project.thumbnail }}" alt="{{ project.thumbnailAlt }}" width="1200" height="630" loading="lazy">
   {%- endif %}
@@ -42,6 +43,9 @@
     {%- endif %}
     {%- if project.demo and not (demos | findBySlug(project.demo)).hidden %}
     <li><a href="{{ root }}demos/{{ project.demo }}/">Demo<span class="visually-hidden">: {{ project.title }}</span></a></li>
+    {%- endif %}
+    {%- if project.demoUrl %}
+    <li>{{ externalLink(project.demoUrl, "Live demo", project.title) }}</li>
     {%- endif %}
     <li>{{ externalLink(project.codeUrl, "Code", project.title) }}</li>
   </ul>

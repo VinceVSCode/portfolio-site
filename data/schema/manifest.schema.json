@@ -1,0 +1,20 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Project manifest (portfolio.json in each project repository, FR-11)",
+  "type": "object",
+  "required": ["id", "title", "track", "summary", "skills", "repo", "demo_url", "thumbnail", "demo_media", "run_command", "status", "version"],
+  "properties": {
+    "id": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$", "description": "sd-NN or ml-NN for the planned projects; a short name for earlier work." },
+    "title": { "type": "string", "minLength": 1, "maxLength": 100 },
+    "track": { "enum": ["software-developer", "machine-learning"] },
+    "summary": { "type": "string", "minLength": 1, "maxLength": 200 },
+    "skills": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "string", "minLength": 1 } },
+    "repo": { "type": "string", "pattern": "^https://github\\.com/[^/]+/[^/]+$" },
+    "demo_url": { "type": ["string", "null"], "pattern": "^https://" },
+    "thumbnail": { "type": ["string", "null"], "description": "Path inside the repository, for example docs/media/thumbnail.png." },
+    "demo_media": { "type": ["string", "null"] },
+    "run_command": { "type": ["string", "null"] },
+    "status": { "type": "string", "minLength": 1, "description": "complete, in-progress or first-attempt." },
+    "version": { "type": ["string", "null"] }
+  }
+}

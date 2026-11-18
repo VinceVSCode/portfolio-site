@@ -41,10 +41,11 @@ npm run check
 
 This runs, in order:
 
-1. `npm run validate:content`: validates `data/*.json` against the schemas in `data/schema/` (with `ajv`), and checks that each case study has its front matter and required sections.
-2. `npm run build`: builds the site.
-3. `npm run validate:html`: validates the built HTML (with `html-validate`).
-4. `npm run check:links`: checks internal links and anchors in `_site/`, and rejects root-absolute paths.
+1. `npm test`: unit tests for the project list built from GitHub manifests (`scripts/lib/*.test.mjs`). They use a fake GitHub and never the network.
+2. `npm run validate:content`: validates `data/*.json` against the schemas in `data/schema/` (with `ajv`), and checks that each case study has its front matter and required sections.
+3. `npm run build`: builds the site.
+4. `npm run validate:html`: validates the built HTML (with `html-validate`).
+5. `npm run check:links`: checks internal links and anchors in `_site/`, and rejects root-absolute paths.
 
 ## Edit content
 
@@ -53,7 +54,7 @@ All text you edit lives in `data/` and `content/`. You do not need to touch the 
 | To change | Edit |
 |---|---|
 | Name, headline, bio, photo, email, GitHub username, LinkedIn, CV file, licences | `data/site.json` |
-| Project cards (home page and projects list) | `data/projects.json` |
+| Project cards (home page and projects list) | `portfolio.json` in each project repository, plus `data/projects.json` (see "Project list" below) |
 | Case study text | `content/projects/<slug>.md` |
 | Demo hub entries | `data/demos.json` |
 
@@ -63,7 +64,7 @@ Notes:
 - **Bio.** Leave `bio` as an empty string (`""`) to show no bio on the home page.
 - **Photo.** Put the image in `assets/img/` and set `photo` and `photoAlt` in `data/site.json`. Remove the `photo` line to show no photo.
 - **CV.** Put the PDF in `assets/files/` and set `cvFile` in `data/site.json`. If `cvFile` is left out, the site shows no CV link.
-- **Add a project.** Add an entry to `data/projects.json`. Set `featured` to `true` to show it on the home page.
+- **Add a project.** Usually nothing to do here: see "Project list" below. Add an entry to `data/projects.json` only to give a project a case study, a demo, a status note, or a place on the home page (`featured`).
 - **Project images.** Put a project's images in `assets/img/projects/<id>/` (for example `assets/img/projects/sd-01/`). To show one on the card, set `thumbnail` to its path and `thumbnailAlt` to a short description. The card image should be 1200×630 pixels. In a case study, link an image as `../assets/img/projects/<id>/<file>`.
 - **Project status.** Set `status` on a project (for example `"Pending quality review"`) to show a short note on its card and case study. `"Complete"` is shown in green, any other value in yellow. Remove the line when it no longer applies.
 - **Hide a project or a demo.** Set `"hidden": true` on its entry. A hidden project has no card and no case study page; a hidden demo is not listed and its folder is not published. The two placeholder projects and the sample demo are hidden. A page with nothing to list shows a short message instead.
@@ -89,11 +90,24 @@ portfolio-site/
 └── _site/                 # build output (not committed)
 ```
 
+## Project list
+
+The cards come from two places, merged at build time (`data/catalog.js`):
+
+1. **GitHub.** The build searches for your repositories with the topic `portfolio-project` and reads the `portfolio.json` in each one. A manifest that does not match `data/schema/manifest.schema.json` is skipped, and the build log says why (lines starting with `[manifests]`). Thumbnails are downloaded and published with the site.
+2. **`data/projects.json`.** An entry with the same `id` as a manifest adds the site-only fields: `slug`, `featured`, `caseStudy`, `demo`, `status`, `hidden`. The manifest supplies the title, summary, skills, track and links. Entries without a manifest are shown as they are.
+
+To add a project: give its repository a valid `portfolio.json` and the topic `portfolio-project`. It appears after the next rebuild: every push to `main`, once a day, or straight away with **Actions > Deploy > Run workflow** on GitHub.
+
+The manifest's `status` sets the badge for projects without an entry: `complete` (green), `in-progress` (yellow), `first-attempt` (gray, used for earlier work).
+
+If GitHub cannot be reached or rate-limits the build, the build uses the last saved copy (in `.cache/`, not committed) or `data/projects.json` alone, and never fails. Locally, a saved copy is reused for one hour. GitHub allows 60 anonymous requests an hour and a build makes about 15; to build more often, run `GITHUB_TOKEN=$(gh auth token) npm run check`, or set `MANIFESTS=off` to skip GitHub. The token is only sent to `api.github.com` and is never written to a file.
+
 ## Deploy to GitHub Pages
 
-Nothing has been pushed or published yet. These steps are for the owner.
+The site is published at <https://vincevscode.github.io/portfolio-site/>. The one-time setup below is already done; it is kept for reference.
 
-The site is published from the **root of the `gh-pages` branch**. You never edit that branch by hand. The `Deploy` workflow builds the site and pushes the output there on every push to `main`.
+The site is published from the **root of the `gh-pages` branch**. You never edit that branch by hand. The `Deploy` workflow builds the site and pushes the output there on every push to `main`, once a day, and when started by hand. GitHub pauses scheduled workflows in a repository with no activity for 60 days; a push or a manual run starts them again.
 
 One-time setup on GitHub:
 

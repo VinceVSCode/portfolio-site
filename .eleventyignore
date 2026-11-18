@@ -3,3 +3,4 @@ docs/
 demos/
 assets/
 scripts/
+.cache/

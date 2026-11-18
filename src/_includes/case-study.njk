@@ -10,7 +10,7 @@ layout: base.njk
 {%- from "macros.njk" import externalLink -%}
 {%- set root = page.url | rootPath -%}
 {#- The matching project entry, or nothing if the slug is not in projects.json. -#}
-{%- set project = projects | findBySlug(page.fileSlug) -%}
+{%- set project = catalog | findBySlug(page.fileSlug) -%}
 <article class="case-study">
   <p><a href="{{ root }}projects/">&larr; All projects</a></p>
   <h1>{{ title }}</h1>

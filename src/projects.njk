@@ -2,7 +2,7 @@
 layout: base.njk
 permalink: projects/index.html
 title: Projects
-description: All projects, with filters by technology and category.
+description: All projects, with filters by track and technology.
 scripts:
   - filters.js
   - github.js
@@ -14,19 +14,26 @@ scripts:
 -#}
 {%- from "macros.njk" import projectCard -%}
 {%- set root = page.url | rootPath -%}
-{#- Projects not hidden in data/projects.json. -#}
-{%- set shown = projects | visible -%}
+{#- Projects not hidden: data/projects.json merged with the GitHub manifests (data/catalog.js). -#}
+{%- set shown = catalog | visible -%}
 <h1>Projects</h1>
 
 {%- if shown.length %}
 
 {#- Filter bar. Hidden until filters.js runs, so it never shows without working buttons. -#}
 <div class="filters" id="project-filters" hidden>
-  <p id="filters-label">Filter by technology or category:</p>
+  <p id="track-label">Track:</p>
+  <ul class="filter-list" aria-labelledby="track-label">
+    <li><button type="button" class="filter-button" data-group="track" data-term="" aria-pressed="true">All</button></li>
+    {%- for term in shown | trackTerms %}
+    <li><button type="button" class="filter-button" data-group="track" data-term="{{ term }}" aria-pressed="false">{{ term }}</button></li>
+    {%- endfor %}
+  </ul>
+  <p id="filters-label">Technology:</p>
   <ul class="filter-list" aria-labelledby="filters-label">
-    <li><button type="button" class="filter-button" data-term="" aria-pressed="true">All</button></li>
+    <li><button type="button" class="filter-button" data-group="tag" data-term="" aria-pressed="true">All</button></li>
     {%- for term in shown | filterTerms %}
-    <li><button type="button" class="filter-button" data-term="{{ term }}" aria-pressed="false">{{ term }}</button></li>
+    <li><button type="button" class="filter-button" data-group="tag" data-term="{{ term }}" aria-pressed="false">{{ term }}</button></li>
     {%- endfor %}
   </ul>
   <p id="filter-status" role="status" class="note"></p>
