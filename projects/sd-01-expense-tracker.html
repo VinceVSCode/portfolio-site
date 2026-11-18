@@ -35,7 +35,7 @@
   <p><a href="../projects/">&larr; All projects</a></p>
   <h1>Expense Tracker CLI</h1>
   <p class="lead">A modular command-line expense tracker with monthly reports and CSV export.</p>
-  <p class="status">Pending quality review</p>
+  <p class="status status-complete">Complete</p>
   <ul class="tags" aria-label="Technologies">
     <li>Python</li>
     <li>OOP</li>
@@ -67,6 +67,7 @@
 <ul>
 <li><strong>Exact money.</strong> Floating-point numbers cannot hold most decimal amounts, so amounts are <code>Decimal</code> values checked in one function, and stored as text in the JSON file.</li>
 <li><strong>Not losing data.</strong> The file is written to a temporary file and then swapped in, so a failed write cannot leave half a file. A damaged file stops the command with a clear error and is never overwritten.</li>
+<li><strong>Found in review.</strong> A quality review found three inputs that crashed with a Python traceback: very large amounts, a data file that is not UTF-8, and Greek text when the output is redirected on Windows. Each is now caught by its own error type and turned into a clear message, with a test that failed before the fix (version 1.0.1).</li>
 <li><strong>Safe CSV export.</strong> Text that a spreadsheet would run as a formula (starting with <code>=</code>, <code>+</code>, <code>-</code> or <code>@</code>) gets a quote in front.</li>
 </ul>
 <h2>Results</h2>
@@ -82,7 +83,7 @@
 <tbody>
 <tr>
 <td>Tests</td>
-<td>175 pass</td>
+<td>201 pass</td>
 </tr>
 <tr>
 <td>Coverage of the domain logic</td>
@@ -98,9 +99,9 @@
 </tr>
 </tbody>
 </table>
-<p><img src="../assets/img/projects/sd-01/tests.png" alt="Test run with the coverage table: 175 tests passed and 98% total coverage."></p>
+<p><img src="../assets/img/projects/sd-01/tests.png" alt="Test run with the coverage table: 201 tests passed and 98% total coverage."></p>
 <h2>What I learned</h2>
-<p>This section will be written after the project passes its quality review.</p>
+<p>This section is coming soon.</p>
 
   </div>
 
