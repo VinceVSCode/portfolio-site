@@ -1,4 +1,13 @@
+{#-
+  Base layout: the outer HTML shell for every page (head, header, navigation,
+  footer). Pages use it through "layout: base.njk" in their front matter, and
+  their own content is inserted where {{ content }} appears in <main>.
+  Page-level values such as title, description and scripts come from each
+  page's front matter.
+-#}
+{#- Path back to the site root from this page (for example "../" on /projects/). -#}
 {%- set root = page.url | rootPath -%}
+{#- Description and title used in <head>. Fall back to the site name. -#}
 {%- set pageDescription = description or summary or site.description -%}
 {%- set pageTitle = (title + " | " + site.name) if title else site.name -%}
 <!DOCTYPE html>
@@ -6,6 +15,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  {#- Content Security Policy: limits where scripts, images and API calls may come from. #}
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' https://api.github.com; img-src 'self' data:; object-src 'none'; base-uri 'self'; form-action 'none'{% if notFound %}; script-src 'self' '{{ notFoundScriptHash }}'{% endif %}">
   <meta name="referrer" content="strict-origin-when-cross-origin">
   {%- if isPreview or notFound %}
@@ -20,6 +30,7 @@
   <link rel="stylesheet" href="{{ root }}assets/css/site.css">
 </head>
 <body>
+  {#- Header with the site name and the main navigation. "aria-current" marks the current page. #}
   <a class="skip-link" href="#main">Skip to main content</a>
   <header class="site-header">
     <div class="wrap header-inner">
@@ -38,6 +49,7 @@
     </div>
   </header>
 
+  {#- The page's own HTML goes here. "safe" stops Nunjucks escaping it. #}
   <main id="main" class="wrap">
     {{ content | safe }}
   </main>
@@ -48,6 +60,7 @@
       <p>This site uses no trackers and no analytics.</p>
     </div>
   </footer>
+  {#- Scripts: the 404 page inlines its own script; other pages load the files listed in "scripts" (front matter). #}
   {%- if notFound %}
   <script>{{ notFoundScript | safe }}</script>
   {%- endif %}

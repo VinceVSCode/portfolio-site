@@ -1,8 +1,15 @@
 ---
 layout: base.njk
 ---
+{#-
+  Layout for one case study. Each file in content/projects/ uses it (see
+  content/projects/projects.11tydata.js). The Markdown body is inserted into
+  .prose. The project's data (status, tags, demo, code link) comes from
+  data/projects.json, matched by the file name.
+-#}
 {%- from "macros.njk" import externalLink -%}
 {%- set root = page.url | rootPath -%}
+{#- The matching project entry, or nothing if the slug is not in projects.json. -#}
 {%- set project = projects | findBySlug(page.fileSlug) -%}
 <article class="case-study">
   <p><a href="{{ root }}projects/">&larr; All projects</a></p>

@@ -4,6 +4,10 @@ permalink: demos/index.html
 title: Demos
 description: Interactive demos that run entirely in your browser.
 ---
+{#-
+  Demos page (served at /demos/). Lists each visible demo from data/demos.json.
+  Each demo is a separate folder under demos/ that is copied as it is.
+-#}
 {%- from "macros.njk" import externalLink -%}
 {%- set root = page.url | rootPath -%}
 <h1>Demos</h1>

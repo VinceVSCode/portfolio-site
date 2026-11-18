@@ -5,6 +5,8 @@ title: Page not found
 description: The page you asked for does not exist.
 notFound: true
 ---
+{#- Shown for unknown URLs. Its inline script (src/_includes/not-found.js) is
+   hashed by eleventy.config.js and allowed by the Content-Security-Policy. -#}
 <h1>Page not found</h1>
 <p>The page you asked for does not exist or has moved.</p>
 <p><a class="button" href="./">Go to the home page</a></p>
