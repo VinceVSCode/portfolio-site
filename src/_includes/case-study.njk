@@ -9,7 +9,7 @@ layout: base.njk
   <h1>{{ title }}</h1>
   <p class="lead">{{ summary }}</p>
   {%- if project and project.status %}
-  <p class="status">{{ project.status }}</p>
+  <p class="status status-{{ project.status | slugify }}">{{ project.status }}</p>
   {%- endif %}
   {%- if project %}
   <ul class="tags" aria-label="Technologies">

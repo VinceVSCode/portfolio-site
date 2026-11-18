@@ -29,6 +29,7 @@ Because the layers are separate, the domain is tested with an in-memory store, a
 
 - **Exact money.** Floating-point numbers cannot hold most decimal amounts, so amounts are `Decimal` values checked in one function, and stored as text in the JSON file.
 - **Not losing data.** The file is written to a temporary file and then swapped in, so a failed write cannot leave half a file. A damaged file stops the command with a clear error and is never overwritten.
+- **Found in review.** A quality review found three inputs that crashed with a Python traceback: very large amounts, a data file that is not UTF-8, and Greek text when the output is redirected on Windows. Each is now caught by its own error type and turned into a clear message, with a test that failed before the fix (version 1.0.1).
 - **Safe CSV export.** Text that a spreadsheet would run as a formula (starting with `=`, `+`, `-` or `@`) gets a quote in front.
 
 ## Results
@@ -39,13 +40,13 @@ The full demo session, from the real application:
 
 | Check | Result |
 |---|---|
-| Tests | 175 pass |
+| Tests | 201 pass |
 | Coverage of the domain logic | 100% (the target was 80%) |
 | Coverage of the whole package | 98% |
 | Run-time dependencies | none |
 
-![Test run with the coverage table: 175 tests passed and 98% total coverage.](../assets/img/projects/sd-01/tests.png)
+![Test run with the coverage table: 201 tests passed and 98% total coverage.](../assets/img/projects/sd-01/tests.png)
 
 ## What I learned
 
-This section will be written after the project passes its quality review.
+This section is coming soon.
