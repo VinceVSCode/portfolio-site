@@ -1,4 +1,11 @@
-{# External link. Shows plain text while the value is still a placeholder. #}
+{#
+  Reusable template pieces. Import them in a page with:
+    {% from "macros.njk" import externalLink, projectCard %}
+#}
+
+{# External link. Shows plain text while the value is still a placeholder.
+   url: the address; label: the link text; context: optional extra text for
+   screen readers; cssClass: optional CSS class for the link. #}
 {% macro externalLink(url, label, context, cssClass) -%}
 {%- if url | isPlaceholder -%}
 <span class="pending">{{ label }}: {{ url or "[NOT SET]" }}</span>
@@ -7,7 +14,12 @@
 {%- endif -%}
 {%- endmacro %}
 
-{# Project card, used on the home page and the projects list. #}
+{# Project card, used on the home page and the projects list.
+   project: one entry from data/projects.json; root: path back to site root;
+   headingLevel: 2 or 3, so headings nest correctly on each page;
+   demos: the demos list, used to hide a demo link when that demo is hidden.
+   data-terms feeds the filter buttons (assets/js/filters.js). data-repo links
+   the card to a GitHub repository (assets/js/github.js). #}
 {% macro projectCard(project, root, headingLevel, demos) -%}
 <li class="card" data-terms="{{ project | projectTerms | join('|') }}"{% if not (project.repo | isPlaceholder) %} data-repo="{{ project.repo }}"{% endif %}>
   {%- if project.thumbnail %}

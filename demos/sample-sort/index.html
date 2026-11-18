@@ -3,6 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Content Security Policy: only files from this same folder may load, and
+       nothing can be submitted through a form. -->
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'">
   <title>[PLACEHOLDER DEMO] Sorting visualiser</title>
   <meta name="description" content="Placeholder demo: an animated bubble sort that runs in the browser.">
@@ -14,11 +16,14 @@
     <h1>[PLACEHOLDER DEMO] Sorting visualiser</h1>
     <p>This sample demo animates a bubble sort. It exists to test the demo hub. Replace it with a demo of a real project.</p>
 
+    <!-- Shown first. demo.js hides it once the demo has started. If the script
+         fails, this message stays visible. -->
     <p id="demo-fallback" role="status">
       Loading the demo. If nothing appears below, the demo could not be loaded in this browser.
       You can still read its source code: <span class="pending">[DEMO SOURCE URL]</span>
     </p>
 
+    <!-- The interactive area. Hidden until demo.js shows it. -->
     <div id="demo" hidden>
       <div id="bars" class="bars" role="img" aria-label="Bar chart of the values being sorted"></div>
       <p class="controls">

@@ -2,8 +2,13 @@
 layout: base.njk
 permalink: index.html
 ---
+{#-
+  Home page (served at /). Shows the intro from data/site.json, the featured
+  projects (projects marked "featured" in data/projects.json), and contact links.
+-#}
 {%- from "macros.njk" import externalLink, projectCard -%}
 {%- set root = page.url | rootPath -%}
+{#- Introduction: name, headline, optional bio and photo, and the main buttons. -#}
 <section class="hero" aria-labelledby="hero-heading">
   {%- if site.photo %}
   <img class="hero-photo" src="{{ root }}{{ site.photo }}" alt="{{ site.photoAlt }}" width="160" height="160">
@@ -25,6 +30,7 @@ permalink: index.html
 
 <section class="section" aria-labelledby="featured-heading">
   <h2 id="featured-heading">Featured projects</h2>
+  {#- Collect the visible projects marked as featured, in the order they appear in the data. -#}
   {%- set featured = [] %}
   {%- for project in projects | visible %}{% if project.featured %}{% set featured = (featured.push(project), featured) %}{% endif %}{% endfor %}
   {%- if featured.length %}
@@ -38,6 +44,7 @@ permalink: index.html
   {%- endif %}
 </section>
 
+{#- Contact links. Placeholder values are shown as plain text until the owner fills them in. -#}
 <section class="section" id="contact" aria-labelledby="contact-heading">
   <h2 id="contact-heading">Contact</h2>
   <ul class="contact-list">

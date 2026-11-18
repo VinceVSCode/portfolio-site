@@ -1,4 +1,13 @@
+/*
+ * Main stylesheet for every page of the site. It is loaded by base.njk.
+ *
+ * Colours, radius, width and font are defined once as CSS custom properties
+ * (variables) on :root below. Change a value there to restyle the whole site.
+ * Sections are grouped by the page part they style, marked by headings like
+ * "Header and footer", "Cards" and "Projects page".
+ */
 :root {
+  /* Colour palette. "pending" and "complete" are the yellow and green badges. */
   --color-bg: #ffffff;
   --color-surface: #f4f6f9;
   --color-text: #1a1f2b;
@@ -15,6 +24,7 @@
   --font: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
+/* Base: a simple reset so padding and borders do not change element widths. */
 *,
 *::before,
 *::after {
@@ -22,9 +32,10 @@
 }
 
 html {
-  -webkit-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%; /* stop phones enlarging text unexpectedly */
 }
 
+/* Page-wide text and colours. */
 body {
   margin: 0;
   font-family: var(--font);
@@ -47,11 +58,13 @@ a:hover {
   color: var(--color-accent-dark);
 }
 
+/* Keyboard focus ring. Keep it visible: it shows where keyboard users are. */
 :focus-visible {
   outline: 3px solid var(--color-accent);
   outline-offset: 2px;
 }
 
+/* Headings: tighter spacing than the browser default. */
 h1,
 h2,
 h3 {
@@ -67,6 +80,7 @@ h2 {
   font-size: 1.5rem;
 }
 
+/* Centred content column. Used by the header, main content and footer. */
 .wrap {
   width: 100%;
   max-width: var(--max-width);
@@ -79,6 +93,8 @@ main.wrap {
   padding-bottom: 3rem;
 }
 
+/* Hides text visually but keeps it for screen readers (for example the
+   "Case study: Title" suffix on links). */
 .visually-hidden {
   position: absolute;
   width: 1px;
@@ -88,6 +104,7 @@ main.wrap {
   white-space: nowrap;
 }
 
+/* "Skip to main content" link. Off-screen until it receives keyboard focus. */
 .skip-link {
   position: absolute;
   left: 0.5rem;
@@ -173,6 +190,7 @@ main.wrap {
   margin-top: 3rem;
 }
 
+/* Primary call-to-action button. Also used for links styled as buttons. */
 .button {
   display: inline-block;
   padding: 0.625rem 1.125rem;
@@ -207,6 +225,7 @@ main.wrap {
   cursor: not-allowed;
 }
 
+/* Yellow marker for text the owner has not filled in yet (see isPlaceholder). */
 .pending {
   display: inline-block;
   padding: 0 0.375rem;
@@ -215,6 +234,7 @@ main.wrap {
   color: var(--color-pending-text);
 }
 
+/* Project status badge (for example "In progress"). Yellow by default. */
 .status {
   display: inline-block;
   align-self: flex-start;
@@ -296,6 +316,7 @@ main.wrap {
 
 /* Cards */
 
+/* Responsive grid of project cards: as many 18rem columns as fit, at least one. */
 .card-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(min(100%, 18rem), 1fr));
@@ -339,6 +360,8 @@ main.wrap {
   font-size: 0.9375rem;
 }
 
+/* Row of links at the bottom of a card. margin-top: auto pushes it down so
+   cards of different heights still line up. */
 .card-links {
   display: flex;
   flex-wrap: wrap;
@@ -378,6 +401,7 @@ main.wrap {
   cursor: pointer;
 }
 
+/* The selected filter button is shown filled in. Set by assets/js/filters.js. */
 .filter-button[aria-pressed="true"] {
   background: var(--color-accent);
   color: #ffffff;
@@ -404,6 +428,8 @@ main.wrap {
   max-width: 46rem;
 }
 
+/* .prose wraps the Markdown body of a case study. These rules style the
+   elements Markdown produces inside it. */
 .prose h2 {
   margin-top: 2rem;
 }

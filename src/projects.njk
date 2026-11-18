@@ -7,13 +7,20 @@ scripts:
   - filters.js
   - github.js
 ---
+{#-
+  Projects page (served at /projects/). Lists every visible project with
+  filter buttons (filters.js) and an optional list of recent GitHub repositories
+  (github.js). Both scripts are listed in the front matter above.
+-#}
 {%- from "macros.njk" import projectCard -%}
 {%- set root = page.url | rootPath -%}
+{#- Projects not hidden in data/projects.json. -#}
 {%- set shown = projects | visible -%}
 <h1>Projects</h1>
 
 {%- if shown.length %}
 
+{#- Filter bar. Hidden until filters.js runs, so it never shows without working buttons. -#}
 <div class="filters" id="project-filters" hidden>
   <p id="filters-label">Filter by technology or category:</p>
   <ul class="filter-list" aria-labelledby="filters-label">
@@ -34,6 +41,7 @@ scripts:
 <p class="empty">No projects are published yet. The first ones are on their way, so please check back soon.</p>
 {%- endif %}
 
+{#- Recent GitHub repositories. Hidden until github.js fills it in; if that fails it stays hidden. -#}
 <section class="section" id="github-repos" data-github-user="{{ site.githubUsername }}" aria-labelledby="github-heading" hidden>
   <h2 id="github-heading">Recently updated on GitHub</h2>
   <ul class="repo-list"></ul>
