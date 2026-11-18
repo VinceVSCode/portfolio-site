@@ -12,7 +12,7 @@
       "thumbnail": { "type": "string", "minLength": 1, "description": "Path of the card image, for example assets/img/projects/sd-01/thumbnail.png. Needs thumbnailAlt." },
       "thumbnailAlt": { "type": "string", "minLength": 1, "description": "Text alternative for the card image." },
       "hidden": { "type": "boolean", "description": "True to keep the project off the site: no card and no case study page." },
-      "status": { "type": "string", "minLength": 1, "description": "Short note shown on the card and the case study, for example Pending quality review." },
+      "status": { "type": "string", "minLength": 1, "description": "Short note shown on the card and the case study, for example Pending quality review. The value Complete is shown in green." },
       "title": { "type": "string", "minLength": 1 },
       "summary": { "type": "string", "minLength": 1, "maxLength": 200 },
       "category": { "type": "string", "minLength": 1 },

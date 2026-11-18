@@ -15,7 +15,7 @@
   {%- endif %}
   <h{{ headingLevel }} class="card-title">{{ project.title }}</h{{ headingLevel }}>
   {%- if project.status %}
-  <p class="status">{{ project.status }}</p>
+  <p class="status status-{{ project.status | slugify }}">{{ project.status }}</p>
   {%- endif %}
   <p>{{ project.summary }}</p>
   <ul class="tags" aria-label="Technologies">

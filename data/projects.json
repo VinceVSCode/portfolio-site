@@ -8,7 +8,7 @@
     "tags": ["Python", "OOP", "Unit Testing", "Git", "CLI design"],
     "featured": true,
     "caseStudy": true,
-    "status": "Pending quality review",
+    "status": "Complete",
     "thumbnail": "assets/img/projects/sd-01/thumbnail.png",
     "thumbnailAlt": "Terminal output of the expense tracker: a list of five expenses and a monthly summary by category.",
     "repo": "sd-01-expense-tracker",
