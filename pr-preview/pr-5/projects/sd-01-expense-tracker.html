@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' https://api.github.com; img-src 'self' data:; object-src 'none'; base-uri 'self'; form-action 'none'">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta name="robots" content="noindex">
+  <title>Expense Tracker CLI | Themis Sarafidis</title>
+  <meta name="description" content="A modular command-line expense tracker with monthly reports and CSV export.">
+  <meta property="og:title" content="Expense Tracker CLI | Themis Sarafidis">
+  <meta property="og:description" content="A modular command-line expense tracker with monthly reports and CSV export.">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Themis Sarafidis">
+  <link rel="stylesheet" href="../assets/css/site.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="site-name" href="../">Themis Sarafidis</a>
+      <nav aria-label="Main">
+        <ul class="nav-list">
+          <li><a href="../">Home</a></li>
+          <li><a href="../projects/">Projects</a></li>
+          <li><a href="../demos/">Demos</a></li>
+          <li><a href="../assets/files/themis-sarafidis-cv.pdf" download>CV (PDF)</a></li>
+          <li><a href="../#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <main id="main" class="wrap">
+    <article class="case-study">
+  <p><a href="../projects/">&larr; All projects</a></p>
+  <h1>Expense Tracker CLI</h1>
+  <p class="lead">A modular command-line expense tracker with monthly reports and CSV export.</p>
+  <p class="status status-complete">Complete</p>
+  <ul class="tags" aria-label="Technologies">
+    <li>Python</li>
+    <li>OOP</li>
+    <li>Unit Testing</li>
+    <li>Git</li>
+    <li>CLI design</li>
+  </ul>
+
+  <div class="prose">
+    <h2>Problem</h2>
+<p>Keeping track of personal spending needs only a few things: record an expense, look at past ones, see where a month's money went, and get the data out. The aim of this project was to build that as a small but complete application, with clean, modular code and tests, and not as one long script.</p>
+<h2>Approach</h2>
+<p>The application has three layers, and each one has a single job:</p>
+<ul>
+<li><strong>Domain:</strong> the expense model and the rules (valid amounts, filtering, the monthly summary). It never reads a file or prints.</li>
+<li><strong>Storage:</strong> one JSON file, read and written through a small interface that the domain defines.</li>
+<li><strong>Command line:</strong> four commands (<code>add</code>, <code>list</code>, <code>summary</code>, <code>export</code>) that turn arguments into calls on the domain and format the result.</li>
+</ul>
+<p>Because the layers are separate, the domain is tested with an in-memory store, and the JSON file could be replaced by a database without touching the rules.</p>
+<h2>Tech stack</h2>
+<ul>
+<li><strong>Python 3.11+</strong>, standard library only at run time, so a fresh clone runs at once.</li>
+<li><strong><code>argparse</code></strong> for the command line.</li>
+<li><strong><code>Decimal</code></strong> for money, so that sums are exact.</li>
+<li><strong><code>pytest</code></strong> and <strong><code>ruff</code></strong> for tests and lint, with coverage enforced on every run.</li>
+<li><strong>Docker</strong> as a second way to run it, without installing Python.</li>
+</ul>
+<h2>Challenges and solutions</h2>
+<ul>
+<li><strong>Exact money.</strong> Floating-point numbers cannot hold most decimal amounts, so amounts are <code>Decimal</code> values checked in one function, and stored as text in the JSON file.</li>
+<li><strong>Not losing data.</strong> The file is written to a temporary file and then swapped in, so a failed write cannot leave half a file. A damaged file stops the command with a clear error and is never overwritten.</li>
+<li><strong>Found in review.</strong> A quality review found three inputs that crashed with a Python traceback: very large amounts, a data file that is not UTF-8, and Greek text when the output is redirected on Windows. Each is now caught by its own error type and turned into a clear message, with a test that failed before the fix (version 1.0.1).</li>
+<li><strong>Safe CSV export.</strong> Text that a spreadsheet would run as a formula (starting with <code>=</code>, <code>+</code>, <code>-</code> or <code>@</code>) gets a quote in front.</li>
+</ul>
+<h2>Results</h2>
+<p>The full demo session, from the real application:</p>
+<p><img src="../assets/img/projects/sd-01/demo.png" alt="Terminal session: adding an expense, listing expenses from a date, the monthly summary, and a CSV export."></p>
+<table>
+<thead>
+<tr>
+<th>Check</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Tests</td>
+<td>201 pass</td>
+</tr>
+<tr>
+<td>Coverage of the domain logic</td>
+<td>100% (the target was 80%)</td>
+</tr>
+<tr>
+<td>Coverage of the whole package</td>
+<td>98%</td>
+</tr>
+<tr>
+<td>Run-time dependencies</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p><img src="../assets/img/projects/sd-01/tests.png" alt="Test run with the coverage table: 201 tests passed and 98% total coverage."></p>
+<h2>What I learned</h2>
+<p>This section is coming soon.</p>
+
+  </div>
+
+  <ul class="card-links case-study-links">
+    <li><a href="../projects/">Back to all projects</a></li>
+    <li><a href="https://github.com/VinceVSCode/sd-01-expense-tracker" target="_blank" rel="noopener noreferrer">Source repository<span class="visually-hidden">: Expense Tracker CLI</span></a></li>
+  </ul>
+</article>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>&copy; Themis Sarafidis. Code licence: MIT. Content licence: CC BY 4.0.</p>
+      <p>This site uses no trackers and no analytics.</p>
+    </div>
+  </footer>
+</body>
+</html>
