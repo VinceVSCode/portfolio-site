@@ -1,2 +1,4 @@
 node_modules/
 _site/
+# Manifests and thumbnails saved between builds (FR-11)
+.cache/

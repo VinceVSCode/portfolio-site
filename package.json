@@ -10,7 +10,8 @@
     "validate:content": "node scripts/validate-content.mjs",
     "validate:html": "html-validate \"_site/**/*.html\"",
     "check:links": "node scripts/check-links.mjs",
-    "check": "npm run validate:content && npm run build && npm run validate:html && npm run check:links"
+    "test": "node --test \"scripts/lib/*.test.mjs\"",
+    "check": "npm test && npm run validate:content && npm run build && npm run validate:html && npm run check:links"
   },
   "devDependencies": {
     "@11ty/eleventy": "^3.1.8",

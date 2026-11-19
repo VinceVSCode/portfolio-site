@@ -19,6 +19,8 @@
   --color-pending-text: #5c4300;
   --color-complete-bg: #dcf5e3;
   --color-complete-text: #14532d;
+  --color-first-attempt-bg: #e7eaef;
+  --color-first-attempt-text: #374151;
   --radius: 8px;
   --max-width: 68rem;
   --font: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
@@ -251,6 +253,12 @@ main.wrap {
 .status-complete {
   background: var(--color-complete-bg);
   color: var(--color-complete-text);
+}
+
+/* Earlier work, from before the planned projects, is gray. */
+.status-first-attempt {
+  background: var(--color-first-attempt-bg);
+  color: var(--color-first-attempt-text);
 }
 
 .empty {

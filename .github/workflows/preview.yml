@@ -37,6 +37,7 @@ jobs:
         run: npm run check
         env:
           PREVIEW: "1"
+          GITHUB_TOKEN: ${{ github.token }}
 
       - name: Deploy or remove preview
         uses: rossjrw/pr-preview-action@v1

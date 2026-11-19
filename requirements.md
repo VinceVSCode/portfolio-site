@@ -38,7 +38,7 @@ Features are listed in priority order in section 5.
 | **Preview deployments** | Each pull request gets a temporary preview URL so changes can be reviewed before they go live. | CI workflow; see FR-8 |
 | **Auto-updating local site** | The copy on the home device updates itself when the default branch changes. | Device setup; see FR-9 |
 | **Content in JSON or Markdown** | All text content is edited in data and content files, not in HTML. | `data/` and `content/`; see FR-10 |
-| **Project list from repository manifests** | The build reads a `portfolio.json` manifest from each project repository, with the manual list as fallback. Decided 2026-11-14, not built yet. | Projects page and home page; see FR-11 |
+| **Project list from repository manifests** | The build reads a `portfolio.json` manifest from each project repository, with the manual list as fallback. Decided 2026-11-14, built 2026-11-18. | Projects page and home page; see FR-11 |
 
 ---
 
@@ -120,7 +120,7 @@ Features are listed in priority order in section 5.
 - JSON files are validated against a schema, and Markdown files have required front matter, both checked in CI.
 - Format options are in section 7.5.3.
 
-### FR-11 Project list from repository manifests (decided 2026-11-14, not built yet)
+### FR-11 Project list from repository manifests (decided 2026-11-14, built 2026-11-18)
 - At build time, the site finds the owner's project repositories with the GitHub search `topic:portfolio-project user:<githubUsername>`, using `githubUsername` from `data/site.json`.
 - For each repository found, the build reads `portfolio.json` from the default branch. A manifest has these keys: `id` (for example `sd-01`), `title`, `track` (`software-developer` or `machine-learning`), `summary`, `skills`, `repo`, `demo_url` (a URL or `null`), `thumbnail`, `demo_media`, `run_command`, `status`, and `version`.
 - Each manifest is validated against a schema stored in `data/schema/`. An invalid manifest is skipped and named in the build log. It is never shown with broken data.
@@ -129,7 +129,7 @@ Features are listed in priority order in section 5.
 - Thumbnails are downloaded at build time and published as part of the site, so the Content-Security-Policy does not change. A card whose thumbnail is missing is shown without an image.
 - The projects page has a track filter with two values: software developer and machine learning.
 - The build may use the token GitHub Actions provides to the workflow. No token is stored in the repository or sent to the browser.
-- The site only picks up a new project when it is rebuilt. The rebuild trigger (a manual workflow run, a schedule, or both) is chosen by the owner at implementation.
+- The site only picks up a new project when it is rebuilt. Rebuild trigger (owner, 2026-11-18): once a day on a schedule, plus a manual "Run workflow" button, in addition to every push to `main`.
 - The browser-side GitHub data in FR-5 is unchanged.
 - **Do not build this until** `githubUsername` is set and at least one project repository with a manifest exists on GitHub, so it can be tested against real data.
 
@@ -148,7 +148,7 @@ Features are listed in priority order in section 5.
 | **P2** | Resume download (FR-7) | |
 | **P2** | Preview deployments (FR-8) | Choose tool in section 7.5.1. |
 | **P2** | Content in JSON or Markdown (FR-10) | Choose format in section 7.5.3. Affects the build setup, so decide early. |
-| **P2** | Project list from repository manifests (FR-11) | Deferred until the first project repository is on GitHub. |
+| **P2** | Project list from repository manifests (FR-11) | Built 2026-11-18. |
 | **P3** | Auto-updating local site (FR-9) | Choose mechanism in section 7.5.2. Depends on local hosting. |
 | **P3 (nice to have)** | Interactive demo hub (FR-4) with at least one demo | Start with one simple demo. |
 | **P3** | Dark mode toggle | |
@@ -334,7 +334,7 @@ For any option, keep the last working version if a pull or check fails. Deployin
     - **B. Build-time manifests, with the manual list as fallback.** The build fetches the manifests and writes them into the site; `data/projects.json` is used if GitHub cannot be reached. Needs new requirements for the fetch, thumbnails (copied into the site at build time, so the Content-Security-Policy stays unchanged), and the track filter.
     - **C. Manifests only, as the plan is written.** No manual list. The build fails or shows nothing if GitHub cannot be reached, which conflicts with the fallback in FR-5.
 
-    The owner chose B on 2026-11-14. It is specified in FR-11 and is not built yet.
+    The owner chose B on 2026-11-14. It is specified in FR-11 and was built on 2026-11-18.
 
 Record each decision here with the date once it is made.
 
@@ -351,7 +351,7 @@ Record each decision here with the date once it is made.
 | 7 | Home-hosting device and operating system: undecided. Setup is documented for both Linux and Windows. **Still open.** | 2026-11-12 |
 | 8 | Custom domain: undecided. The site uses relative paths so either works. **Still open.** | 2026-11-12 |
 | 9 | Tool choices: preview deployments use `rossjrw/pr-preview-action` (7.5.1 A); the local site updates by scheduled `git pull` (7.5.2 A); content format is Eleventy (7.5.3 C). | 2026-11-12 |
-| 10 | Project list: option B, build-time manifests with `data/projects.json` as fallback (FR-11). To be built once `githubUsername` is set and the first project repository is on GitHub. The rebuild trigger is **still open**. | 2026-11-14 |
+| 10 | Project list: option B, build-time manifests with `data/projects.json` as fallback (FR-11). Built 2026-11-18. Rebuild trigger: daily schedule plus a manual button (owner, 2026-11-18). | 2026-11-14, 2026-11-18 |
 
 ---
 
@@ -378,3 +378,4 @@ Record each decision here with the date once it is made.
 | 2026-11-15 | Added the first two real projects (SD-01 expense tracker, ML-01 tabular prediction) to `data/projects.json`, each with a case study. Project cards can now show an image: optional `thumbnail` and `thumbnailAlt` fields, plus an optional `id` that FR-11 will use to match an entry to its manifest. Project images live in `assets/img/projects/<id>/`. The two placeholder projects are still listed (decision 5 stays open). The "What I learned" sections are placeholders for the owner. The code links do not open until the repositories are pushed. |
 | 2026-11-15 | Owner details set in `data/site.json`: name, headline, site description, photo, email, GitHub username and LinkedIn link. The bio is empty at the owner's request, so `bio` may now be an empty string and the home page then shows no bio. `cvFile` is now optional and is left out until the owner provides a PDF without the phone number; the site shows no CV link meanwhile. GitHub and LinkedIn are shown as buttons in the Contact section. The owner decided to host on GitHub Pages first and on a home PC later (decision 7 device still open). Still placeholders: the two licences, the "What I learned" sections, and the two placeholder projects. |
 | 2026-11-15 | Decision 5 and 6 (owner): the two placeholder projects and the sample demo are hidden, not deleted, with a new optional `hidden` field; a page with nothing to list shows a short message. Projects can carry a `status` note; SD-01 and ML-01 show "Pending quality review", and their "What I learned" sections will be written after that review. Decision 3 (owner): code licence MIT, content licence CC BY 4.0; `LICENSE` added. The CV is published as a PDF with the phone number removed. |
+| 2026-11-18 | FR-11 built. The build finds repositories with the topic `portfolio-project`, validates each `portfolio.json` against `data/schema/manifest.schema.json`, downloads thumbnails into the site, and merges the result with `data/projects.json` (`data/catalog.js`, `scripts/lib/`). Without GitHub it falls back to the last saved copy or to `data/projects.json` alone. The projects page has a track filter next to the technology filter. Owner decisions: rebuild daily and on demand; ten earlier repositories added with a manifest and the topic, shown with a gray "First attempt" badge. Manifest ids may now be any short name; `sd-NN` and `ml-NN` stay reserved for the planned projects. `npm test` (Node's test runner) is part of `npm run check`. |

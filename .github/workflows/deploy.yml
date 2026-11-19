@@ -7,6 +7,12 @@ name: Deploy
 on:
   push:
     branches: [main]
+  # Rebuild once a day, so a new or changed project manifest on GitHub
+  # appears without a push to this repository (FR-11).
+  schedule:
+    - cron: "23 4 * * *"
+  # Adds a "Run workflow" button under Actions > Deploy for an immediate rebuild.
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -29,8 +35,12 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      # The token GitHub gives this run lets the build read the project
+      # manifests without the anonymous rate limit. It is not stored anywhere.
       - name: Validate content, build, validate HTML, check internal links
         run: npm run check
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
 
       # Second link check with lychee. It does not block the deploy until it
       # has been seen to pass on GitHub; remove "fail: false" after that.
