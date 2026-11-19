@@ -29,7 +29,6 @@ Because the layers are separate, the domain is tested with an in-memory store, a
 
 - **Exact money.** Floating-point numbers cannot hold most decimal amounts, so amounts are `Decimal` values checked in one function, and stored as text in the JSON file.
 - **Not losing data.** The file is written to a temporary file and then swapped in, so a failed write cannot leave half a file. A damaged file stops the command with a clear error and is never overwritten.
-- **Found in review.** A quality review found three inputs that crashed with a Python traceback: very large amounts, a data file that is not UTF-8, and Greek text when the output is redirected on Windows. Each is now caught by its own error type and turned into a clear message, with a test that failed before the fix (version 1.0.1).
 - **Safe CSV export.** Text that a spreadsheet would run as a formula (starting with `=`, `+`, `-` or `@`) gets a quote in front.
 
 ## Results
@@ -49,4 +48,4 @@ The full demo session, from the real application:
 
 ## What I learned
 
-This section is coming soon.
+Path handling, Docker implementation, exporting in different formats, CI/CD best practices and the most important part, if you don't restrain your AI companion it will overcomplicate, overdeliver and produce a result that might be functional, pleasant on the eye but far more complicated than it has to be.
