@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' https://api.github.com; img-src 'self' data:; object-src 'none'; base-uri 'self'; form-action 'none'; script-src 'self' 'sha256-A1egT/s7OS6cpT40hkKQTFEdqR0vV/D42Qse7fv4cpo='">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta name="robots" content="noindex">
+  <title>Page not found | Themis Sarafidis</title>
+  <meta name="description" content="The page you asked for does not exist.">
+  <meta property="og:title" content="Page not found | Themis Sarafidis">
+  <meta property="og:description" content="The page you asked for does not exist.">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Themis Sarafidis">
+  <link rel="stylesheet" href="./assets/css/site.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="site-name" href="./">Themis Sarafidis</a>
+      <nav aria-label="Main">
+        <ul class="nav-list">
+          <li><a href="./">Home</a></li>
+          <li><a href="./projects/">Projects</a></li>
+          <li><a href="./demos/">Demos</a></li>
+          <li><a href="./assets/files/themis-sarafidis-cv.pdf" download>CV (PDF)</a></li>
+          <li><a href="./#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <main id="main" class="wrap">
+    <h1>Page not found</h1>
+<p>The page you asked for does not exist or has moved.</p>
+<p><a class="button" href="./">Go to the home page</a></p>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>&copy; Themis Sarafidis. Code licence: MIT. Content licence: CC BY 4.0.</p>
+      <p>This site uses no trackers and no analytics.</p>
+    </div>
+  </footer>
+  <script>// 404.html can be served at any URL depth, so its relative links may not
+// resolve. Walk up the path until the site root marker is found, then point
+// the page's base URL at it.
+(async () => {
+  const depth = location.pathname.split("/").length - 2;
+  for (let level = 0; level <= depth; level++) {
+    const prefix = level === 0 ? "./" : "../".repeat(level);
+    try {
+      const response = await fetch(prefix + "assets/site-root.json", { cache: "no-store" });
+      if (!response.ok) continue;
+      const data = await response.json();
+      if (data.marker !== "portfolio-site-root") continue;
+      if (level > 0) {
+        const base = document.createElement("base");
+        base.href = new URL(prefix, location.href).href;
+        document.head.prepend(base);
+        for (const link of document.querySelectorAll('link[rel="stylesheet"]')) {
+          link.href = new URL(link.getAttribute("href"), base.href).href;
+        }
+      }
+      return;
+    } catch {
+      // Try the next level up.
+    }
+  }
+})();</script>
+</body>
+</html>

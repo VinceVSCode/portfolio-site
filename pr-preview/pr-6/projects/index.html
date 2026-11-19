@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' https://api.github.com; img-src 'self' data:; object-src 'none'; base-uri 'self'; form-action 'none'">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta name="robots" content="noindex">
+  <title>Projects | Themis Sarafidis</title>
+  <meta name="description" content="All projects, with filters by track and technology.">
+  <meta property="og:title" content="Projects | Themis Sarafidis">
+  <meta property="og:description" content="All projects, with filters by track and technology.">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Themis Sarafidis">
+  <link rel="stylesheet" href="../assets/css/site.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="site-name" href="../">Themis Sarafidis</a>
+      <nav aria-label="Main">
+        <ul class="nav-list">
+          <li><a href="../">Home</a></li>
+          <li><a href="../projects/" aria-current="page">Projects</a></li>
+          <li><a href="../demos/">Demos</a></li>
+          <li><a href="../assets/files/themis-sarafidis-cv.pdf" download>CV (PDF)</a></li>
+          <li><a href="../#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <main id="main" class="wrap">
+    <h1>Projects</h1><div class="filters" id="project-filters" hidden>
+  <p id="track-label">Track:</p>
+  <ul class="filter-list" aria-labelledby="track-label">
+    <li><button type="button" class="filter-button" data-group="track" data-term="" aria-pressed="true">All</button></li>
+    <li><button type="button" class="filter-button" data-group="track" data-term="Machine learning" aria-pressed="false">Machine learning</button></li>
+    <li><button type="button" class="filter-button" data-group="track" data-term="Software development" aria-pressed="false">Software development</button></li>
+  </ul>
+  <p id="filters-label">Technology:</p>
+  <ul class="filter-list" aria-labelledby="filters-label">
+    <li><button type="button" class="filter-button" data-group="tag" data-term="" aria-pressed="true">All</button></li>
+    <li><button type="button" class="filter-button" data-group="tag" data-term="asyncio" aria-pressed="false">asyncio</button></li>
+    <li><button type="button" class="filter-button" data-group="tag" data-term="CLI design" aria-pressed="false">CLI design</button></li>
+    <li><button type="button" class="filter-button" data-group="tag" data-term="Collections" aria-pressed="false">Collections</button></li>
+    <li><button type="button" class="filter-button" data-group="tag" data-term="Computer Vision" aria-pressed="false">Computer Vision</button></li>
+    <li><button type="button" class="filter-button" data-group="tag" data-term="Concurrency" aria-pressed="false">Concurrency</button></li>
+    <li><button type="button" class="filter-button" data-group="tag" data-term="Cross-Validation" aria-pressed="false">Cross-Validation</button></li>
+    <li><button type="button" class="filter-button" data-group="tag" data-term="CSS" aria-pressed="false">CSS</button></li>
+    <li><button type="button" class="filter-button" data-group="tag" data-term="Django" aria-pressed="false">Django</button></li>
+    <li><button type="button" class="filter-button" data-group="tag" data-term="Django REST Framework" aria-pressed="false">Django REST Framework</button></li>
+    <li><button type="button" class="filter-button" data-group="tag" data-term="Docker" aria-pressed="false">Docker</button></li>
+    <li><button type="button" class="filter-button" data-group="tag" data-term="Exploratory Data Analysis" aria-pressed="false">Exploratory Data Analysis</button></li>
+    <li><button type="button" class="filter-button" data-group="tag" data-term="Express" aria-pressed="false">Express</button></li>
+    <li><button type="button" class="filter-button" data-group="tag" data-term="FastAPI" aria-pressed="false">FastAPI</button></li>
+    <li><button type="button" class="filter-button" data-group="tag" data-term="Feature Engineering" aria-pressed="false">Feature Engineering</button></li>
+    <li><button type="button" class="filter-button" data-group="tag" data-term="File I/O" aria-pressed="false">File I/O</button></li>
+    <li><button type="button" class="filter-button" data-group="tag" data-term="Git" aria-pressed="false">Git</button></li>
+    <li><button type="button" class="filter-button" data-group="tag" data-term="HTML" aria-pressed="false">HTML</button></li>
+    <li><button type="button" class="filter-button" data-group="tag" data-term="Java" aria-pressed="false">Java</button></li>
+    <li><button type="button" class="filter-button" data-group="tag" data-term="JavaScript" aria-pressed="false">JavaScript</button></li>
+    <li><button type="button" class="filter-button" data-group="tag" data-term="Jupyter" aria-pressed="false">Jupyter</button></li>
+    <li><button type="button" class="filter-button" data-group="tag" data-term="Machine Learning" aria-pressed="false">Machine Learning</button></li>
+    <li><button type="button" class="filter-button" data-group="tag" data-term="Mask R-CNN" aria-pressed="false">Mask R-CNN</button></li>
+    <li><button type="button" class="filter-button" data-group="tag" data-term="Node.js" aria-pressed="false">Node.js</button></li>
+    <li><button type="button" class="filter-button" data-group="tag" data-term="OOP" aria-pressed="false">OOP</button></li>
+    <li><button type="button" class="filter-button" data-group="tag" data-term="pandas" aria-pressed="false">pandas</button></li>
+    <li><button type="button" class="filter-button" data-group="tag" data-term="Pandas" aria-pressed="false">Pandas</button></li>
+    <li><button type="button" class="filter-button" data-group="tag" data-term="PostgreSQL" aria-pressed="false">PostgreSQL</button></li>
+    <li><button type="button" class="filter-button" data-group="tag" data-term="Pydantic" aria-pressed="false">Pydantic</button></li>
+    <li><button type="button" class="filter-button" data-group="tag" data-term="Python" aria-pressed="false">Python</button></li>
+    <li><button type="button" class="filter-button" data-group="tag" data-term="scikit-learn" aria-pressed="false">scikit-learn</button></li>
+    <li><button type="button" class="filter-button" data-group="tag" data-term="Spring Boot" aria-pressed="false">Spring Boot</button></li>
+    <li><button type="button" class="filter-button" data-group="tag" data-term="Spring Security" aria-pressed="false">Spring Security</button></li>
+    <li><button type="button" class="filter-button" data-group="tag" data-term="SQL" aria-pressed="false">SQL</button></li>
+    <li><button type="button" class="filter-button" data-group="tag" data-term="SQLAlchemy" aria-pressed="false">SQLAlchemy</button></li>
+    <li><button type="button" class="filter-button" data-group="tag" data-term="TensorFlow" aria-pressed="false">TensorFlow</button></li>
+    <li><button type="button" class="filter-button" data-group="tag" data-term="UML" aria-pressed="false">UML</button></li>
+    <li><button type="button" class="filter-button" data-group="tag" data-term="Unit Testing" aria-pressed="false">Unit Testing</button></li>
+  </ul>
+  <p id="filter-status" role="status" class="note"></p>
+</div>
+
+<ul class="card-grid" id="project-list">
+  <li class="card" data-track="Software development" data-terms="Python|OOP|Unit Testing|Git|CLI design" data-repo="sd-01-expense-tracker">
+  <img class="card-thumb" src="../assets/img/manifests/sd-01.png" alt="Terminal output of the expense tracker: a list of five expenses and a monthly summary by category." width="1200" height="630" loading="lazy">
+  <h2 class="card-title">Expense Tracker CLI</h2>
+  <p class="status status-complete">Complete</p>
+  <p>A modular command-line expense tracker with monthly reports and CSV export.</p>
+  <ul class="tags" aria-label="Technologies">
+    <li>Python</li>
+    <li>OOP</li>
+    <li>Unit Testing</li>
+    <li>Git</li>
+    <li>CLI design</li>
+  </ul>
+  <p class="gh-meta" hidden></p>
+  <ul class="card-links">
+    <li><a href="../projects/sd-01-expense-tracker.html">Case study<span class="visually-hidden">: Expense Tracker CLI</span></a></li>
+    <li><a href="https://github.com/VinceVSCode/sd-01-expense-tracker" target="_blank" rel="noopener noreferrer">Code<span class="visually-hidden">: Expense Tracker CLI</span></a></li>
+  </ul>
+</li>
+  <li class="card" data-track="Machine learning" data-terms="Python|Pandas|Exploratory Data Analysis|scikit-learn|Cross-Validation|Feature Engineering" data-repo="ml-01-tabular-prediction">
+  <img class="card-thumb" src="../assets/img/manifests/ml-01.png" alt="Bar chart comparing a baseline and three models on seven metrics. Gradient boosting scores best on six of them." width="1200" height="630" loading="lazy">
+  <h2 class="card-title">Tabular Prediction with Exploratory Analysis</h2>
+  <p class="status status-pending-quality-review">Pending quality review</p>
+  <p>Predicts whether a person earns above 50K from census data: cleaning, a scikit-learn feature pipeline, three models compared with cross-validation, and an error analysis.</p>
+  <ul class="tags" aria-label="Technologies">
+    <li>Python</li>
+    <li>Pandas</li>
+    <li>Exploratory Data Analysis</li>
+    <li>scikit-learn</li>
+    <li>Cross-Validation</li>
+    <li>Feature Engineering</li>
+  </ul>
+  <p class="gh-meta" hidden></p>
+  <ul class="card-links">
+    <li><a href="../projects/ml-01-tabular-prediction.html">Case study<span class="visually-hidden">: Tabular Prediction with Exploratory Analysis</span></a></li>
+    <li><a href="https://github.com/VinceVSCode/ml-01-tabular-prediction" target="_blank" rel="noopener noreferrer">Code<span class="visually-hidden">: Tabular Prediction with Exploratory Analysis</span></a></li>
+  </ul>
+</li>
+  <li class="card" data-track="Software development" data-terms="Java|Spring Boot|Spring Security|PostgreSQL|JavaScript|Docker" data-repo="CoinCollectors">
+  <h2 class="card-title">Coin Collectors</h2>
+  <p class="status status-first-attempt">First attempt</p>
+  <p>A web app for tracking personal coin collections: accounts, a shared catalogue, completion progress and an admin panel. Spring Boot REST API with PostgreSQL.</p>
+  <ul class="tags" aria-label="Technologies">
+    <li>Java</li>
+    <li>Spring Boot</li>
+    <li>Spring Security</li>
+    <li>PostgreSQL</li>
+    <li>JavaScript</li>
+    <li>Docker</li>
+  </ul>
+  <p class="gh-meta" hidden></p>
+  <ul class="card-links">
+    <li><a href="https://github.com/VinceVSCode/CoinCollectors" target="_blank" rel="noopener noreferrer">Code<span class="visually-hidden">: Coin Collectors</span></a></li>
+  </ul>
+</li>
+  <li class="card" data-track="Software development" data-terms="Java|OOP|UML|SQL" data-repo="MedicineSupplySystem">
+  <h2 class="card-title">Medicine Supply System</h2>
+  <p class="status status-first-attempt">First attempt</p>
+  <p>A Java coursework project for a medical supply warehouse: medicines, categories and stock movements, designed in UML first, with in-memory and SQL storage.</p>
+  <ul class="tags" aria-label="Technologies">
+    <li>Java</li>
+    <li>OOP</li>
+    <li>UML</li>
+    <li>SQL</li>
+  </ul>
+  <p class="gh-meta" hidden></p>
+  <ul class="card-links">
+    <li><a href="https://github.com/VinceVSCode/MedicineSupplySystem" target="_blank" rel="noopener noreferrer">Code<span class="visually-hidden">: Medicine Supply System</span></a></li>
+  </ul>
+</li>
+  <li class="card" data-track="Software development" data-terms="Python|Django|Django REST Framework|PostgreSQL|Docker" data-repo="Django_Playground">
+  <h2 class="card-title">Django Playground</h2>
+  <p class="status status-first-attempt">First attempt</p>
+  <p>A Django learning project: user login, personal notes you can create, edit and delete, HTML templates and a REST API.</p>
+  <ul class="tags" aria-label="Technologies">
+    <li>Python</li>
+    <li>Django</li>
+    <li>Django REST Framework</li>
+    <li>PostgreSQL</li>
+    <li>Docker</li>
+  </ul>
+  <p class="gh-meta" hidden></p>
+  <ul class="card-links">
+    <li><a href="https://github.com/VinceVSCode/Django_Playground" target="_blank" rel="noopener noreferrer">Code<span class="visually-hidden">: Django Playground</span></a></li>
+  </ul>
+</li>
+  <li class="card" data-track="Software development" data-terms="Java|OOP|Collections|File I/O" data-repo="Java-Basics">
+  <h2 class="card-title">Java Basics</h2>
+  <p class="status status-first-attempt">First attempt</p>
+  <p>Java exercises from the basics to object-oriented programming: classes, encapsulation, inheritance, polymorphism, exceptions, collections and file input and output.</p>
+  <ul class="tags" aria-label="Technologies">
+    <li>Java</li>
+    <li>OOP</li>
+    <li>Collections</li>
+    <li>File I/O</li>
+  </ul>
+  <p class="gh-meta" hidden></p>
+  <ul class="card-links">
+    <li><a href="https://github.com/VinceVSCode/Java-Basics" target="_blank" rel="noopener noreferrer">Code<span class="visually-hidden">: Java Basics</span></a></li>
+  </ul>
+</li>
+  <li class="card" data-track="Software development" data-terms="Python|SQLAlchemy|FastAPI|Pydantic|Docker" data-repo="SQLAlchemy-Library">
+  <h2 class="card-title">SQLAlchemy Library</h2>
+  <p class="status status-first-attempt">First attempt</p>
+  <p>A small library management system with a command-line interface and a REST API for books, authors, users and loans.</p>
+  <ul class="tags" aria-label="Technologies">
+    <li>Python</li>
+    <li>SQLAlchemy</li>
+    <li>FastAPI</li>
+    <li>Pydantic</li>
+    <li>Docker</li>
+  </ul>
+  <p class="gh-meta" hidden></p>
+  <ul class="card-links">
+    <li><a href="https://github.com/VinceVSCode/SQLAlchemy-Library" target="_blank" rel="noopener noreferrer">Code<span class="visually-hidden">: SQLAlchemy Library</span></a></li>
+  </ul>
+</li>
+  <li class="card" data-track="Software development" data-terms="Python|SQLAlchemy|pandas|CLI design|Docker" data-repo="Recipe-Management-System">
+  <h2 class="card-title">Recipe Management System</h2>
+  <p class="status status-first-attempt">First attempt</p>
+  <p>A command-line recipe manager with a menu to add, list, search by title or ingredient, and delete recipes.</p>
+  <ul class="tags" aria-label="Technologies">
+    <li>Python</li>
+    <li>SQLAlchemy</li>
+    <li>pandas</li>
+    <li>CLI design</li>
+    <li>Docker</li>
+  </ul>
+  <p class="gh-meta" hidden></p>
+  <ul class="card-links">
+    <li><a href="https://github.com/VinceVSCode/Recipe-Management-System" target="_blank" rel="noopener noreferrer">Code<span class="visually-hidden">: Recipe Management System</span></a></li>
+  </ul>
+</li>
+  <li class="card" data-track="Software development" data-terms="Python|asyncio|Concurrency|Pandas" data-repo="Python_General">
+  <h2 class="card-title">Python General</h2>
+  <p class="status status-first-attempt">First attempt</p>
+  <p>Python practice: asynchronous code with asyncio, thread and process pools, and pandas analysis of small medical datasets.</p>
+  <ul class="tags" aria-label="Technologies">
+    <li>Python</li>
+    <li>asyncio</li>
+    <li>Concurrency</li>
+    <li>Pandas</li>
+  </ul>
+  <p class="gh-meta" hidden></p>
+  <ul class="card-links">
+    <li><a href="https://github.com/VinceVSCode/Python_General" target="_blank" rel="noopener noreferrer">Code<span class="visually-hidden">: Python General</span></a></li>
+  </ul>
+</li>
+  <li class="card" data-track="Machine learning" data-terms="Python|TensorFlow|Mask R-CNN|Computer Vision|Jupyter" data-repo="Project_Master_Thesis">
+  <h2 class="card-title">Master&#39;s Thesis: Vehicle Recognition</h2>
+  <p class="status status-first-attempt">First attempt</p>
+  <p>Code from my master&#39;s thesis on recognising vehicles at intersections: object detection experiments with Mask R-CNN, TensorFlow and the COCO dataset.</p>
+  <ul class="tags" aria-label="Technologies">
+    <li>Python</li>
+    <li>TensorFlow</li>
+    <li>Mask R-CNN</li>
+    <li>Computer Vision</li>
+    <li>Jupyter</li>
+  </ul>
+  <p class="gh-meta" hidden></p>
+  <ul class="card-links">
+    <li><a href="https://github.com/VinceVSCode/Project_Master_Thesis" target="_blank" rel="noopener noreferrer">Code<span class="visually-hidden">: Master&#39;s Thesis: Vehicle Recognition</span></a></li>
+  </ul>
+</li>
+  <li class="card" data-track="Machine learning" data-terms="Python|TensorFlow|Machine Learning|Jupyter" data-repo="Machine-Learning">
+  <h2 class="card-title">Machine Learning Practice</h2>
+  <p class="status status-first-attempt">First attempt</p>
+  <p>Machine learning practice notebooks and scripts: first steps with TensorFlow, linear regression, and house price and bank loan prediction.</p>
+  <ul class="tags" aria-label="Technologies">
+    <li>Python</li>
+    <li>TensorFlow</li>
+    <li>Machine Learning</li>
+    <li>Jupyter</li>
+  </ul>
+  <p class="gh-meta" hidden></p>
+  <ul class="card-links">
+    <li><a href="https://github.com/VinceVSCode/Machine-Learning" target="_blank" rel="noopener noreferrer">Code<span class="visually-hidden">: Machine Learning Practice</span></a></li>
+  </ul>
+</li>
+  <li class="card" data-track="Software development" data-terms="HTML|CSS|JavaScript|Node.js|Express" data-repo="3www">
+  <h2 class="card-title">Ella Fitzgerald Tribute Site</h2>
+  <p class="status status-first-attempt">First attempt</p>
+  <p>A university web assignment: a tribute page to Ella Fitzgerald with a biography, photo gallery and discography, plus a small Express server with a login API.</p>
+  <ul class="tags" aria-label="Technologies">
+    <li>HTML</li>
+    <li>CSS</li>
+    <li>JavaScript</li>
+    <li>Node.js</li>
+    <li>Express</li>
+  </ul>
+  <p class="gh-meta" hidden></p>
+  <ul class="card-links">
+    <li><a href="https://github.com/VinceVSCode/3www" target="_blank" rel="noopener noreferrer">Code<span class="visually-hidden">: Ella Fitzgerald Tribute Site</span></a></li>
+  </ul>
+</li>
+</ul><section class="section" id="github-repos" data-github-user="VinceVSCode" aria-labelledby="github-heading" hidden>
+  <h2 id="github-heading">Recently updated on GitHub</h2>
+  <ul class="repo-list"></ul>
+  <p class="note">Loaded from the public GitHub API and cached in your browser for one hour.</p>
+</section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>&copy; Themis Sarafidis. Code licence: MIT. Content licence: CC BY 4.0.</p>
+      <p>This site uses no trackers and no analytics.</p>
+    </div>
+  </footer>
+  <script type="module" src="../assets/js/filters.js"></script>
+  <script type="module" src="../assets/js/github.js"></script>
+</body>
+</html>
