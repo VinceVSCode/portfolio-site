@@ -54,6 +54,17 @@
 <li><strong>Command line:</strong> four commands (<code>add</code>, <code>list</code>, <code>summary</code>, <code>export</code>) that turn arguments into calls on the domain and format the result.</li>
 </ul>
 <p>Because the layers are separate, the domain is tested with an in-memory store, and the JSON file could be replaced by a database without touching the rules.</p>
+<h2>Execution instructions</h2>
+<p>There is no live demo, because this is a command-line tool. Run it on your own machine in one of two ways.</p>
+<p><strong>With Python</strong> (3.11 or newer), in the cloned project folder:</p>
+<pre><code class="language-bash">python -m venv .venv
+.venv\Scripts\Activate.ps1   # macOS or Linux: source .venv/bin/activate
+pip install -e .
+python -m expense_tracker add 12.50 food --note lunch
+python -m expense_tracker summary
+</code></pre>
+<p><strong>With Docker</strong> (no Python needed): <code>docker compose run --rm expense-tracker summary</code>. Put any command after the service name; the data stays in a Docker volume between runs.</p>
+<p>To try every command on a throwaway file, run <code>python scripts/demo.py</code>.</p>
 <h2>Tech stack</h2>
 <ul>
 <li><strong>Python 3.11+</strong>, standard library only at run time, so a fresh clone runs at once.</li>

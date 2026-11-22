@@ -57,6 +57,17 @@
 <li><strong>Compare</strong> a baseline and three models (logistic regression, random forest, gradient boosting) with 5-fold cross-validation.</li>
 <li><strong>Test</strong> the best model once, on rows set aside at the start, and look at where it is wrong.</li>
 </ol>
+<h2>Execution instructions</h2>
+<p>There is no live demo. The project runs on your own machine and writes its results to files.</p>
+<p><strong>With Python</strong> (3.11 or newer), in the cloned project folder:</p>
+<pre><code class="language-bash">python -m venv .venv
+.venv\Scripts\Activate.ps1   # macOS or Linux: source .venv/bin/activate
+pip install -e .
+python scripts/train.py
+</code></pre>
+<p>The last command downloads the data (6 MB) on its first run, trains and tests the models in about 40 seconds, and writes the results to <code>reports/</code> and the model to <code>models/</code>.</p>
+<p><strong>With Docker</strong> (no Python needed): <code>docker compose run --rm app</code>. The same files appear in <code>reports/</code> and <code>models/</code>.</p>
+<p>To open the exploratory notebook, install the extra tools with <code>pip install -e &quot;.[notebook]&quot;</code>.</p>
 <h2>Tech stack</h2>
 <ul>
 <li><strong>Python</strong>, <strong>Pandas</strong> and <strong>scikit-learn</strong> for the data and the models.</li>
