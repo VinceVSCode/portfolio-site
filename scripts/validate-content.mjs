@@ -13,6 +13,7 @@ import matter from "gray-matter";
 const REQUIRED_SECTIONS = [
   "Problem",
   "Approach",
+  "Execution instructions",
   "Tech stack",
   "Challenges and solutions",
   "Results",

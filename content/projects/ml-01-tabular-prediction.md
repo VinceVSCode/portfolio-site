@@ -19,6 +19,25 @@ The data is the Adult dataset from the UCI Machine Learning Repository (1994 Uni
 4. **Compare** a baseline and three models (logistic regression, random forest, gradient boosting) with 5-fold cross-validation.
 5. **Test** the best model once, on rows set aside at the start, and look at where it is wrong.
 
+## Execution instructions
+
+There is no live demo. The project runs on your own machine and writes its results to files.
+
+**With Python** (3.11 or newer), in the cloned project folder:
+
+```bash
+python -m venv .venv
+.venv\Scripts\Activate.ps1   # macOS or Linux: source .venv/bin/activate
+pip install -e .
+python scripts/train.py
+```
+
+The last command downloads the data (6 MB) on its first run, trains and tests the models in about 40 seconds, and writes the results to `reports/` and the model to `models/`.
+
+**With Docker** (no Python needed): `docker compose run --rm app`. The same files appear in `reports/` and `models/`.
+
+To open the exploratory notebook, install the extra tools with `pip install -e ".[notebook]"`.
+
 ## Tech stack
 
 - **Python**, **Pandas** and **scikit-learn** for the data and the models.
