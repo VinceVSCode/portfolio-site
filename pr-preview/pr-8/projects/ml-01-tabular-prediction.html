@@ -126,7 +126,7 @@ python scripts/train.py
 <p><img src="../assets/img/projects/ml-01/demo.png" alt="Test results: a ROC curve with area 0.933, a table of 6,966 and 1,583 correct answers against 456 false alarms and 753 misses, and a histogram of predicted probabilities."></p>
 <p>The model misses a high income (32% of them) far more often than it raises a false alarm (6%). The misses are not spread evenly: 43% of high-earning women are missed against 30% of men. The data is from 1994 and includes sex and race, so this model is an exercise and must not be used for decisions about people.</p>
 <h2>What I learned</h2>
-<p>Coming soon.</p>
+<p>The reason for this project is to gather the introductory &quot;usual suspects&quot; for ML models, their metrics, perform a data analysis and cleaning, and produce visual results. For every ML problem, you consider different factors. What is more important, precision or recall? While in this demonstration gradient boosting might seem the best choice based on the results, in a real-world scenario, with different volumes of data and distributions, the process must be repeated all over again. Determining whether your models become biased, overfit or completely chaotic is what ML is about. Decide what the best practice is for your current problem. In this case, since it's a prediction without any real damage when a false positive or false negative shows up, F1 makes the most sense. No tuning was done and the training parameters were pretty standard. More playing around will come in the next ones.</p>
 
   </div>
 
