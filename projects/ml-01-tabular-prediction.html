@@ -34,7 +34,7 @@
   <p><a href="../projects/">&larr; All projects</a></p>
   <h1>Tabular Prediction with Exploratory Analysis</h1>
   <p class="lead">Predicts whether a person earns above 50K from census data, with three models compared by cross-validation and an error analysis.</p>
-  <p class="status status-pending-quality-review">Pending quality review</p>
+  <p class="status status-complete">Complete</p>
   <ul class="tags" aria-label="Technologies">
     <li>Python</li>
     <li>Pandas</li>
@@ -59,13 +59,14 @@
 </ol>
 <h2>Execution instructions</h2>
 <p>There is no live demo. The project runs on your own machine and writes its results to files.</p>
-<p><strong>With Python</strong> (3.11 or newer), in the cloned project folder:</p>
+<p><strong>With Python</strong> (3.12 or newer), in the cloned project folder:</p>
 <pre><code class="language-bash">python -m venv .venv
 .venv\Scripts\Activate.ps1   # macOS or Linux: source .venv/bin/activate
 pip install -e .
 python scripts/train.py
 </code></pre>
 <p>The last command downloads the data (6 MB) on its first run, trains and tests the models in about 40 seconds, and writes the results to <code>reports/</code> and the model to <code>models/</code>.</p>
+<p><strong>Run it from the project folder.</strong> The scripts work in the folder they are started from: the data, results and model go into <code>data/</code>, <code>reports/</code> and <code>models/</code> there. Started from another folder, they download the data again and write a new set of results in that folder.</p>
 <p><strong>With Docker</strong> (no Python needed): <code>docker compose run --rm app</code>. The same files appear in <code>reports/</code> and <code>models/</code>.</p>
 <p>To open the exploratory notebook, install the extra tools with <code>pip install -e &quot;.[notebook]&quot;</code>.</p>
 <h2>Tech stack</h2>
@@ -124,7 +125,7 @@ python scripts/train.py
 <p><img src="../assets/img/projects/ml-01/demo.png" alt="Test results: a ROC curve with area 0.933, a table of 6,966 and 1,583 correct answers against 456 false alarms and 753 misses, and a histogram of predicted probabilities."></p>
 <p>The model misses a high income (32% of them) far more often than it raises a false alarm (6%). The misses are not spread evenly: 43% of high-earning women are missed against 30% of men. The data is from 1994 and includes sex and race, so this model is an exercise and must not be used for decisions about people.</p>
 <h2>What I learned</h2>
-<p>This section will be written after the project passes its quality review.</p>
+<p>The reason for this project is to gather the introductory &quot;usual suspects&quot; for ML models, their metrics, perform a data analysis and cleaning, and produce visual results. For every ML problem, you consider different factors. What is more important, precision or recall? While in this demonstration gradient boosting might seem the best choice based on the results, in a real-world scenario, with different volumes of data and distributions, the process must be repeated all over again. Determining whether your models become biased, overfit or completely chaotic is what ML is about. Decide what the best practice is for your current problem. In this case, since it's a prediction without any real damage when a false positive or false negative shows up, F1 makes the most sense. No tuning was done and the training parameters were pretty standard. More playing around will come in the next ones.</p>
 
   </div>
 
