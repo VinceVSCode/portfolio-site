@@ -23,7 +23,7 @@
     "tags": ["Python", "Pandas", "Exploratory Data Analysis", "scikit-learn", "Cross-Validation", "Feature Engineering"],
     "featured": true,
     "caseStudy": true,
-    "status": "Pending quality review",
+    "status": "Complete",
     "thumbnail": "assets/img/projects/ml-01/thumbnail.png",
     "thumbnailAlt": "Bar chart comparing a baseline and three models on seven metrics. Gradient boosting scores best on six of them.",
     "repo": "ml-01-tabular-prediction",
