@@ -11,6 +11,10 @@ summary: "[PROJECT TWO: one-line summary.]"
 
 [PLACEHOLDER: how did you approach the problem? What options did you consider?]
 
+## Execution instructions
+
+[PLACEHOLDER: how to run it: the live demo link, or the commands for a local run, Docker, or wherever it runs. 10 to 20 lines.]
+
 ## Tech stack
 
 [PLACEHOLDER: languages, frameworks and tools, and why you chose them.]

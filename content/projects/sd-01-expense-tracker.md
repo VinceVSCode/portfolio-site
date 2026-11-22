@@ -17,6 +17,24 @@ The application has three layers, and each one has a single job:
 
 Because the layers are separate, the domain is tested with an in-memory store, and the JSON file could be replaced by a database without touching the rules.
 
+## Execution instructions
+
+There is no live demo, because this is a command-line tool. Run it on your own machine in one of two ways.
+
+**With Python** (3.11 or newer), in the cloned project folder:
+
+```bash
+python -m venv .venv
+.venv\Scripts\Activate.ps1   # macOS or Linux: source .venv/bin/activate
+pip install -e .
+python -m expense_tracker add 12.50 food --note lunch
+python -m expense_tracker summary
+```
+
+**With Docker** (no Python needed): `docker compose run --rm expense-tracker summary`. Put any command after the service name; the data stays in a Docker volume between runs.
+
+To try every command on a throwaway file, run `python scripts/demo.py`.
+
 ## Tech stack
 
 - **Python 3.11+**, standard library only at run time, so a fresh clone runs at once.
