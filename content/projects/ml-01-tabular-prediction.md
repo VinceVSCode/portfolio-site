@@ -75,4 +75,4 @@ The model misses a high income (32% of them) far more often than it raises a fal
 
 ## What I learned
 
-Coming soon.
+The reason for this project is to gather the introductory "usual suspects" for ML models, their metrics, perform a data analysis and cleaning, and produce visual results. For every ML problem, you consider different factors. What is more important, precision or recall? While in this demonstration gradient boosting might seem the best choice based on the results, in a real-world scenario, with different volumes of data and distributions, the process must be repeated all over again. Determining whether your models become biased, overfit or completely chaotic is what ML is about. Decide what the best practice is for your current problem. In this case, since it's a prediction without any real damage when a false positive or false negative shows up, F1 makes the most sense. No tuning was done and the training parameters were pretty standard. More playing around will come in the next ones.
