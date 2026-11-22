@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' https://api.github.com; img-src 'self' data:; object-src 'none'; base-uri 'self'; form-action 'none'">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta name="robots" content="noindex">
+  <title>Tabular Prediction with Exploratory Analysis | Themis Sarafidis</title>
+  <meta name="description" content="Predicts whether a person earns above 50K from census data, with three models compared by cross-validation and an error analysis.">
+  <meta property="og:title" content="Tabular Prediction with Exploratory Analysis | Themis Sarafidis">
+  <meta property="og:description" content="Predicts whether a person earns above 50K from census data, with three models compared by cross-validation and an error analysis.">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Themis Sarafidis">
+  <link rel="stylesheet" href="../assets/css/site.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="site-name" href="../">Themis Sarafidis</a>
+      <nav aria-label="Main">
+        <ul class="nav-list">
+          <li><a href="../">Home</a></li>
+          <li><a href="../projects/">Projects</a></li>
+          <li><a href="../demos/">Demos</a></li>
+          <li><a href="../assets/files/themis-sarafidis-cv.pdf" download>CV (PDF)</a></li>
+          <li><a href="../#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <main id="main" class="wrap">
+    <article class="case-study">
+  <p><a href="../projects/">&larr; All projects</a></p>
+  <h1>Tabular Prediction with Exploratory Analysis</h1>
+  <p class="lead">Predicts whether a person earns above 50K from census data, with three models compared by cross-validation and an error analysis.</p>
+  <p class="status status-complete">Complete</p>
+  <ul class="tags" aria-label="Technologies">
+    <li>Python</li>
+    <li>Pandas</li>
+    <li>Exploratory Data Analysis</li>
+    <li>scikit-learn</li>
+    <li>Cross-Validation</li>
+    <li>Feature Engineering</li>
+  </ul>
+
+  <div class="prose">
+    <h2>Problem</h2>
+<p>Given census answers about a person (age, education, occupation, hours worked and others), predict whether their yearly income is above 50,000 dollars. The aim was the complete workflow for a standard prediction problem, where one command reproduces every number, and not the highest possible score.</p>
+<p>The data is the Adult dataset from the UCI Machine Learning Repository (1994 United States census, CC BY 4.0): 48,790 people after cleaning, of whom 24% earn above 50K.</p>
+<p><img src="../assets/img/projects/ml-01/data_overview.png" alt="Three charts: 76% of people earn 50K or less; the share of high incomes rises with education; it rises and then falls with age."></p>
+<h2>Approach</h2>
+<ol>
+<li><strong>Explore</strong> the raw data in a notebook to see what must be cleaned and which columns relate to income.</li>
+<li><strong>Clean:</strong> trim text, turn <code>?</code> into missing values, read the two spellings of the target, and drop duplicate rows.</li>
+<li><strong>Engineer features</strong> in a scikit-learn <code>ColumnTransformer</code> that sits inside each model's pipeline, so nothing is learned from the rows a model is checked on.</li>
+<li><strong>Compare</strong> a baseline and three models (logistic regression, random forest, gradient boosting) with 5-fold cross-validation.</li>
+<li><strong>Test</strong> the best model once, on rows set aside at the start, and look at where it is wrong.</li>
+</ol>
+<h2>Execution instructions</h2>
+<p>There is no live demo. The project runs on your own machine and writes its results to files.</p>
+<p><strong>With Python</strong> (3.12 or newer), in the cloned project folder:</p>
+<pre><code class="language-bash">python -m venv .venv
+.venv\Scripts\Activate.ps1   # macOS or Linux: source .venv/bin/activate
+pip install -e .
+python scripts/train.py
+</code></pre>
+<p>The last command downloads the data (6 MB) on its first run, trains and tests the models in about 40 seconds, and writes the results to <code>reports/</code> and the model to <code>models/</code>.</p>
+<p><strong>Run it from the project folder.</strong> The scripts work in the folder they are started from: the data, results and model go into <code>data/</code>, <code>reports/</code> and <code>models/</code> there. Started from another folder, they download the data again and write a new set of results in that folder.</p>
+<p><strong>With Docker</strong> (no Python needed): <code>docker compose run --rm app</code>. The same files appear in <code>reports/</code> and <code>models/</code>.</p>
+<p>To open the exploratory notebook, install the extra tools with <code>pip install -e &quot;.[notebook]&quot;</code>.</p>
+<h2>Tech stack</h2>
+<ul>
+<li><strong>Python</strong>, <strong>Pandas</strong> and <strong>scikit-learn</strong> for the data and the models.</li>
+<li><strong>Matplotlib</strong> for the figures, and a <strong>Jupyter notebook</strong> for the exploration.</li>
+<li><strong><code>pytest</code></strong> and <strong><code>ruff</code></strong>; the tests use a small made-up table and no network.</li>
+<li><strong>Docker</strong> as a second way to run the training.</li>
+</ul>
+<h2>Challenges and solutions</h2>
+<ul>
+<li><strong>Unbalanced classes.</strong> Always answering &quot;50K or less&quot; is right 76% of the time, so accuracy alone says little. The project reports F1, ROC AUC, RMSE and MAE next to a baseline, and explains what each one hides.</li>
+<li><strong>Reproducibility.</strong> A fixed seed, pinned library versions and a limit on threads make the same command write the same metrics file every time. A test checks this.</li>
+<li><strong>A light run.</strong> Everything trains in about 40 seconds on a 2-core laptop, with near-default settings and no tuning. Heavier settings live in one configuration file for a later run on a stronger machine.</li>
+</ul>
+<h2>Results</h2>
+<p>Gradient boosting was best in cross-validation on six of seven metrics.</p>
+<p><img src="../assets/img/projects/ml-01/thumbnail.png" alt="Bar chart comparing a baseline and three models on seven metrics. Gradient boosting scores best on six of them."></p>
+<p>On 9,758 test rows the model never saw:</p>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Gradient boosting</th>
+<th>Baseline</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>F1</td>
+<td>0.724</td>
+<td>0.000</td>
+</tr>
+<tr>
+<td>ROC AUC</td>
+<td>0.933</td>
+<td>0.500</td>
+</tr>
+<tr>
+<td>RMSE (of the probability)</td>
+<td>0.292</td>
+<td>0.427</td>
+</tr>
+<tr>
+<td>MAE (of the probability)</td>
+<td>0.171</td>
+<td>0.364</td>
+</tr>
+<tr>
+<td>Accuracy</td>
+<td>0.876</td>
+<td>0.761</td>
+</tr>
+</tbody>
+</table>
+<p><img src="../assets/img/projects/ml-01/demo.png" alt="Test results: a ROC curve with area 0.933, a table of 6,966 and 1,583 correct answers against 456 false alarms and 753 misses, and a histogram of predicted probabilities."></p>
+<p>The model misses a high income (32% of them) far more often than it raises a false alarm (6%). The misses are not spread evenly: 43% of high-earning women are missed against 30% of men. The data is from 1994 and includes sex and race, so this model is an exercise and must not be used for decisions about people.</p>
+<h2>What I learned</h2>
+<p>Coming soon.</p>
+
+  </div>
+
+  <ul class="card-links case-study-links">
+    <li><a href="../projects/">Back to all projects</a></li>
+    <li><a href="https://github.com/VinceVSCode/ml-01-tabular-prediction" target="_blank" rel="noopener noreferrer">Source repository<span class="visually-hidden">: Tabular Prediction with Exploratory Analysis</span></a></li>
+  </ul>
+</article>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>&copy; Themis Sarafidis. Code licence: MIT. Content licence: CC BY 4.0.</p>
+      <p>This site uses no trackers and no analytics.</p>
+    </div>
+  </footer>
+</body>
+</html>

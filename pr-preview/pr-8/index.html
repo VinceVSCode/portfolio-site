@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' https://api.github.com; img-src 'self' data:; object-src 'none'; base-uri 'self'; form-action 'none'">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta name="robots" content="noindex">
+  <title>Themis Sarafidis</title>
+  <meta name="description" content="The site is made to demonstrate the projects I&#39;ve created so far.">
+  <meta property="og:title" content="Themis Sarafidis">
+  <meta property="og:description" content="The site is made to demonstrate the projects I&#39;ve created so far.">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Themis Sarafidis">
+  <link rel="stylesheet" href="./assets/css/site.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="site-name" href="./">Themis Sarafidis</a>
+      <nav aria-label="Main">
+        <ul class="nav-list">
+          <li><a href="./" aria-current="page">Home</a></li>
+          <li><a href="./projects/">Projects</a></li>
+          <li><a href="./demos/">Demos</a></li>
+          <li><a href="./assets/files/themis-sarafidis-cv.pdf" download>CV (PDF)</a></li>
+          <li><a href="./#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <main id="main" class="wrap">
+    <section class="hero" aria-labelledby="hero-heading">
+  <img class="hero-photo" src="./assets/img/profile.jpg" alt="Portrait of Themis Sarafidis" width="160" height="160">
+  <div>
+    <h1 id="hero-heading">Themis Sarafidis</h1>
+    <p class="lead">Code, Bug, Debug, Repeat!</p>
+    <p>Software engineer with experience in backend development, machine learning and API testing. My most familiar languages are Python and Java, paired with Docker and GitHub Actions as everyday tools. Favorite hobby is observing &#39;bugs&#39; (Not really) and data analytics.</p>
+    <p class="hero-actions">
+      <a class="button" href="./projects/">See all projects</a>
+      <a class="button button-secondary" href="./assets/files/themis-sarafidis-cv.pdf" download>Download CV (PDF)</a>
+    </p>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="featured-heading">
+  <h2 id="featured-heading">Featured projects</h2>
+  <ul class="card-grid">
+    <li class="card" data-track="Software development" data-terms="Python|OOP|Unit Testing|Git|CLI design" data-repo="sd-01-expense-tracker">
+  <img class="card-thumb" src="./assets/img/manifests/sd-01.png" alt="Terminal output of the expense tracker: a list of five expenses and a monthly summary by category." width="1200" height="630" loading="lazy">
+  <h3 class="card-title">Expense Tracker CLI</h3>
+  <p class="status status-complete">Complete</p>
+  <p>A modular command-line expense tracker with monthly reports and CSV export.</p>
+  <ul class="tags" aria-label="Technologies">
+    <li>Python</li>
+    <li>OOP</li>
+    <li>Unit Testing</li>
+    <li>Git</li>
+    <li>CLI design</li>
+  </ul>
+  <p class="gh-meta" hidden></p>
+  <ul class="card-links">
+    <li><a href="./projects/sd-01-expense-tracker.html">Case study<span class="visually-hidden">: Expense Tracker CLI</span></a></li>
+    <li><a href="https://github.com/VinceVSCode/sd-01-expense-tracker" target="_blank" rel="noopener noreferrer">Code<span class="visually-hidden">: Expense Tracker CLI</span></a></li>
+  </ul>
+</li>
+    <li class="card" data-track="Machine learning" data-terms="Python|Pandas|Exploratory Data Analysis|scikit-learn|Cross-Validation|Feature Engineering" data-repo="ml-01-tabular-prediction">
+  <img class="card-thumb" src="./assets/img/manifests/ml-01.png" alt="Bar chart comparing a baseline and three models on seven metrics. Gradient boosting scores best on six of them." width="1200" height="630" loading="lazy">
+  <h3 class="card-title">Tabular Prediction with Exploratory Analysis</h3>
+  <p class="status status-complete">Complete</p>
+  <p>Predicts whether a person earns above 50K from census data: cleaning, a scikit-learn feature pipeline, three models compared with cross-validation, and an error analysis.</p>
+  <ul class="tags" aria-label="Technologies">
+    <li>Python</li>
+    <li>Pandas</li>
+    <li>Exploratory Data Analysis</li>
+    <li>scikit-learn</li>
+    <li>Cross-Validation</li>
+    <li>Feature Engineering</li>
+  </ul>
+  <p class="gh-meta" hidden></p>
+  <ul class="card-links">
+    <li><a href="./projects/ml-01-tabular-prediction.html">Case study<span class="visually-hidden">: Tabular Prediction with Exploratory Analysis</span></a></li>
+    <li><a href="https://github.com/VinceVSCode/ml-01-tabular-prediction" target="_blank" rel="noopener noreferrer">Code<span class="visually-hidden">: Tabular Prediction with Exploratory Analysis</span></a></li>
+  </ul>
+</li>
+  </ul>
+</section><section class="section" id="contact" aria-labelledby="contact-heading">
+  <h2 id="contact-heading">Contact</h2>
+  <ul class="contact-list">
+    <li><a href="mailto:sarafidis12@gmail.com">Email: sarafidis12@gmail.com</a></li>
+    <li><a class="button button-secondary" href="https://github.com/VinceVSCode" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+    <li><a class="button button-secondary" href="https://www.linkedin.com/in/themis-sarafidis-41126a26b/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+  </ul>
+</section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>&copy; Themis Sarafidis. Code licence: MIT. Content licence: CC BY 4.0.</p>
+      <p>This site uses no trackers and no analytics.</p>
+    </div>
+  </footer>
+</body>
+</html>
