@@ -30,6 +30,21 @@
     "codeUrl": "https://github.com/VinceVSCode/ml-01-tabular-prediction"
   },
   {
+    "slug": "sd-02-library-api",
+    "id": "sd-02",
+    "title": "Library REST API with Database",
+    "summary": "A REST API for a small library: books, members and loans in PostgreSQL, with validation, paging, token login and an OpenAPI page.",
+    "category": "Software development",
+    "tags": ["Python", "REST APIs", "SQL", "PostgreSQL", "Authentication", "Docker", "Alembic"],
+    "featured": true,
+    "caseStudy": true,
+    "status": "Pending quality review",
+    "thumbnail": "assets/img/projects/sd-02/thumbnail.png",
+    "thumbnailAlt": "The OpenAPI page of the Library API, listing the login and book endpoints with an Authorize button.",
+    "repo": "sd-02-library-api",
+    "codeUrl": "https://github.com/VinceVSCode/sd-02-library-api"
+  },
+  {
     "slug": "placeholder-project-one",
     "hidden": true,
     "title": "[PROJECT ONE TITLE]",

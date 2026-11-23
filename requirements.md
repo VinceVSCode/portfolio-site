@@ -382,3 +382,4 @@ Record each decision here with the date once it is made.
 | 2026-11-22 | Case studies gain a required "Execution instructions" section after "Approach": how to run the project (live demo, or local, Docker or command-line run) in 10 to 20 lines. Added to SD-01 and ML-01; the content check now requires it. |
 | 2026-11-22 | ML-01 passed its quality review (version 1.0.1): status set to Complete (green). Its case study asks for Python 3.12 or newer and says the scripts work in the folder they are started from. |
 | 2026-11-22 | ML-01 "What I learned" written by the owner. |
+| 2026-11-23 | SD-02 (Library REST API) added: entry in `data/projects.json` (featured, "Pending quality review"), case study, and three images in `assets/img/projects/sd-02/`. |
