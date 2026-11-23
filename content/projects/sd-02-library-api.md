@@ -66,4 +66,4 @@ A session with the running API: a request without a token is refused, a book is 
 
 ## What I learned
 
-Coming soon.
+How to set up a database, create a schema, create the rules, the routing and the controllers for the REST API. There are many alternative user authentication methods; tokens are the bare minimum. Create the relationships for the database. Create a basic login role, "the librarian". Test in different scenarios whether the API is well protected.
