@@ -67,5 +67,9 @@
   {%- for script in scripts %}
   <script type="module" src="{{ root }}assets/js/{{ script }}"></script>
   {%- endfor %}
+  {#- The image viewer runs on every page that has project images. #}
+  {%- if not notFound %}
+  <script type="module" src="{{ root }}assets/js/lightbox.js"></script>
+  {%- endif %}
 </body>
 </html>
