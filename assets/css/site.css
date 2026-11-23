@@ -475,3 +475,95 @@ main.wrap {
   padding-top: 1.25rem;
   border-top: 1px solid var(--color-border);
 }
+
+/* Image viewer (assets/js/lightbox.js): project images open full size, with zoom. */
+.zoom-trigger {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: zoom-in;
+}
+
+.zoom-trigger img {
+  display: block;
+}
+
+.lightbox {
+  width: 100vw;
+  max-width: none;
+  height: 100vh;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+
+.lightbox::backdrop {
+  background: rgba(10, 14, 22, 0.88);
+}
+
+html:has(.lightbox[open]) {
+  overflow: hidden; /* the page behind stays still */
+}
+
+.lightbox[open] {
+  display: flex;
+  flex-direction: column;
+}
+
+.lightbox-bar {
+  cursor: zoom-out; /* a click here, outside the controls, also closes */
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem;
+}
+
+.lightbox-button {
+  min-width: 2.75rem;
+  min-height: 2.75rem;
+  padding: 0 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  font: inherit;
+  font-size: 1.125rem;
+  cursor: pointer;
+}
+
+.lightbox-button:hover {
+  background: rgba(255, 255, 255, 0.24);
+}
+
+.lightbox-button:focus-visible {
+  outline-color: #ffffff;
+}
+
+.lightbox-level {
+  min-width: 3.5rem;
+  color: #ffffff;
+  text-align: center;
+}
+
+/* The area around the image. A click on it closes the viewer. */
+.lightbox-stage {
+  display: flex;
+  flex: 1;
+  overflow: auto;
+  padding: 0 1rem 1rem;
+  cursor: zoom-out;
+}
+
+.lightbox-image {
+  flex: none; /* keep the size the zoom buttons set; do not shrink to the stage */
+  max-width: none;
+  height: auto;
+  margin: auto; /* centred when smaller than the stage, scrollable when larger */
+  background: #ffffff;
+  cursor: default;
+}
