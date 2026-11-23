@@ -38,7 +38,7 @@
     "tags": ["Python", "REST APIs", "SQL", "PostgreSQL", "Authentication", "Docker", "Alembic"],
     "featured": true,
     "caseStudy": true,
-    "status": "Pending quality review",
+    "status": "Complete",
     "thumbnail": "assets/img/projects/sd-02/thumbnail.png",
     "thumbnailAlt": "The OpenAPI page of the Library API, listing the login and book endpoints with an Authorize button.",
     "repo": "sd-02-library-api",

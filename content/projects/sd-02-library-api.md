@@ -48,6 +48,7 @@ Then open **http://localhost:8000/docs**, press **Authorize**, and log in with `
 - **Tests without Docker.** The tests build their database with the real migrations, on a temporary SQLite file, so `pytest` works on a fresh clone. CI runs the same tests on PostgreSQL, the real database.
 - **A database that does not answer.** At first a request hung when PostgreSQL was down. A 5-second connection timeout fixed it: `/health` now answers 503 within about 3 seconds.
 - **Not revealing usernames.** An unknown username takes as long to refuse as a wrong password, so the answer time gives nothing away.
+- **Found in review.** Ids too large for PostgreSQL and text with a NUL character crashed requests with a 500 error, and `%` in a search matched everything. Version 1.0.1 refuses such input with a clear 422 answer and searches as plain text.
 
 ## Results
 
@@ -57,12 +58,12 @@ A session with the running API: a request without a token is refused, a book is 
 
 | Check | Result |
 |---|---|
-| Tests | 156 pass, on SQLite and on PostgreSQL 18 |
+| Tests | 191 pass, on SQLite and on PostgreSQL 18 |
 | Protected endpoints | each of the 12 refuses a missing or forged token (401) |
 | Whole stack | `docker compose up` passes all 7 outside checks, locally and in CI |
 | Database down | `/health` answers 503 within about 3 seconds |
 
-![Test run: 156 tests passed.](../assets/img/projects/sd-02/tests.png)
+![Test run: 191 tests passed.](../assets/img/projects/sd-02/tests.png)
 
 ## What I learned
 

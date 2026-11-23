@@ -384,3 +384,4 @@ Record each decision here with the date once it is made.
 | 2026-11-22 | ML-01 "What I learned" written by the owner. |
 | 2026-11-23 | SD-02 (Library REST API) added: entry in `data/projects.json` (featured, "Pending quality review"), case study, and three images in `assets/img/projects/sd-02/`. |
 | 2026-11-23 | Project images (card thumbnails and case-study images) open in a full-window viewer with zoom (-, +, Fit, keys + - 0, Ctrl + wheel); a click outside the image or Escape closes it and returns to the same place (`assets/js/lightbox.js`, loaded on every page). SD-02 "What I learned" written by the owner. |
+| 2026-11-23 | SD-02 passed its quality review (version 1.0.1): status set to Complete (green); case study and images updated to 191 tests. |
