@@ -34,7 +34,7 @@
   <p><a href="../projects/">&larr; All projects</a></p>
   <h1>Library REST API with Database</h1>
   <p class="lead">A REST API for a small library: books, members and loans in PostgreSQL, with validation, paging, token login and an OpenAPI page.</p>
-  <p class="status status-pending-quality-review">Pending quality review</p>
+  <p class="status status-complete">Complete</p>
   <ul class="tags" aria-label="Technologies">
     <li>Python</li>
     <li>REST APIs</li>
@@ -80,6 +80,7 @@ docker compose up --build
 <li><strong>Tests without Docker.</strong> The tests build their database with the real migrations, on a temporary SQLite file, so <code>pytest</code> works on a fresh clone. CI runs the same tests on PostgreSQL, the real database.</li>
 <li><strong>A database that does not answer.</strong> At first a request hung when PostgreSQL was down. A 5-second connection timeout fixed it: <code>/health</code> now answers 503 within about 3 seconds.</li>
 <li><strong>Not revealing usernames.</strong> An unknown username takes as long to refuse as a wrong password, so the answer time gives nothing away.</li>
+<li><strong>Found in review.</strong> Ids too large for PostgreSQL and text with a NUL character crashed requests with a 500 error, and <code>%</code> in a search matched everything. Version 1.0.1 refuses such input with a clear 422 answer and searches as plain text.</li>
 </ul>
 <h2>Results</h2>
 <p>A session with the running API: a request without a token is refused, a book is lent, lending it again is refused with 409, and the loan is returned.</p>
@@ -94,7 +95,7 @@ docker compose up --build
 <tbody>
 <tr>
 <td>Tests</td>
-<td>156 pass, on SQLite and on PostgreSQL 18</td>
+<td>191 pass, on SQLite and on PostgreSQL 18</td>
 </tr>
 <tr>
 <td>Protected endpoints</td>
@@ -110,7 +111,7 @@ docker compose up --build
 </tr>
 </tbody>
 </table>
-<p><img src="../assets/img/projects/sd-02/tests.png" alt="Test run: 156 tests passed."></p>
+<p><img src="../assets/img/projects/sd-02/tests.png" alt="Test run: 191 tests passed."></p>
 <h2>What I learned</h2>
 <p>How to set up a database, create a schema, create the rules, the routing and the controllers for the REST API. There are many alternative user authentication methods; tokens are the bare minimum. Create the relationships for the database. Create a basic login role, &quot;the librarian&quot;. Test in different scenarios whether the API is well protected.</p>
 
