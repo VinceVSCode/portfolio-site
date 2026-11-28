@@ -45,6 +45,21 @@
     "codeUrl": "https://github.com/VinceVSCode/sd-02-library-api"
   },
   {
+    "slug": "sd-03-react-fullstack",
+    "id": "sd-03",
+    "title": "React Full-Stack Mini App",
+    "summary": "A librarian's web app for the SD-02 Library API: sign in, then manage books, members and loans.",
+    "category": "Software development",
+    "tags": ["React", "TypeScript", "State Management", "REST APIs", "Frontend Testing"],
+    "featured": true,
+    "caseStudy": true,
+    "status": "Pending quality review",
+    "thumbnail": "assets/img/projects/sd-03/thumbnail.png",
+    "thumbnailAlt": "The app's book list: titles, authors, years and ISBNs, each book marked Available or On loan, with Lend, Edit and Delete buttons.",
+    "repo": "sd-03-react-fullstack",
+    "codeUrl": "https://github.com/VinceVSCode/sd-03-react-fullstack"
+  },
+  {
     "slug": "placeholder-project-one",
     "hidden": true,
     "title": "[PROJECT ONE TITLE]",
