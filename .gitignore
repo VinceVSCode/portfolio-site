@@ -1,4 +1,8 @@
+# Files Git should never track. Generated or machine-specific.
+
+# Installed npm packages. Recreate with "npm ci".
 node_modules/
+# The built site, produced by "npm run build". Never edit it by hand.
 _site/
 # Manifests and thumbnails saved between builds (FR-11)
 .cache/

@@ -1,4 +1,8 @@
+# Line endings and file types for Git.
+
+# Text files: Git stores them with LF and converts to the platform's line endings.
 * text=auto
+# Images and PDFs are binary: Git must not change their bytes.
 *.pdf binary
 *.png binary
 *.jpg binary
