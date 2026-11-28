@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' https://api.github.com; img-src 'self' data:; object-src 'none'; base-uri 'self'; form-action 'none'">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta name="robots" content="noindex">
+  <title>React Full-Stack Mini App | Themis Sarafidis</title>
+  <meta name="description" content="A librarian&#39;s web app for the SD-02 Library API: sign in, then manage books, members and loans.">
+  <meta property="og:title" content="React Full-Stack Mini App | Themis Sarafidis">
+  <meta property="og:description" content="A librarian&#39;s web app for the SD-02 Library API: sign in, then manage books, members and loans.">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Themis Sarafidis">
+  <link rel="stylesheet" href="../assets/css/site.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="site-name" href="../">Themis Sarafidis</a>
+      <nav aria-label="Main">
+        <ul class="nav-list">
+          <li><a href="../">Home</a></li>
+          <li><a href="../projects/">Projects</a></li>
+          <li><a href="../demos/">Demos</a></li>
+          <li><a href="../assets/files/themis-sarafidis-cv.pdf" download>CV (PDF)</a></li>
+          <li><a href="../#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <main id="main" class="wrap">
+    <article class="case-study">
+  <p><a href="../projects/">&larr; All projects</a></p>
+  <h1>React Full-Stack Mini App</h1>
+  <p class="lead">A librarian&#39;s web app for the SD-02 Library API: sign in, then manage books, members and loans.</p>
+  <p class="status status-pending-quality-review">Pending quality review</p>
+  <ul class="tags" aria-label="Technologies">
+    <li>React</li>
+    <li>TypeScript</li>
+    <li>State Management</li>
+    <li>REST APIs</li>
+    <li>Frontend Testing</li>
+  </ul>
+
+  <div class="prose">
+    <h2>Problem</h2>
+<p>The <a href="sd-02-library-api.html">SD-02 Library API</a> holds a library's books, members and loans, but a librarian can only reach it through its OpenAPI page. The aim of this project was a web app on top of that API: sign in once, then find, add, change and delete books and members, lend books and take them back. The app had to work against the real API, not a copy of it. It also had to stay usable when a request fails, the session ends, or the network is slow.</p>
+<h2>Approach</h2>
+<ul>
+<li><strong>One place for the signed-in user.</strong> A reducer behind a React context holds the token, the username and when the session ends. Every change to the session (sign in, sign out, time out, token refused) goes through that one function, which is easy to test.</li>
+<li><strong>A typed client for the API.</strong> Every SD-02 endpoint has a typed function. Each failure becomes a readable message, and validation errors are shown next to the field they belong to.</li>
+<li><strong>A short, safe session.</strong> The token is kept in memory and in <code>sessionStorage</code>: a reload keeps the librarian signed in, closing the tab signs them out. The app signs out 20 minutes after sign-in, before the token's own 30 minutes run out.</li>
+<li><strong>Screens that keep their place.</strong> Each list has paging, search and a filter kept in the address, so a reload, a shared link or the Back button keeps them. Deleting and returning ask first, because neither can be undone.</li>
+<li><strong>One command to run.</strong> Docker Compose starts PostgreSQL, the published SD-02 image, the demo data and the app. nginx serves the app and passes <code>/api/</code> on to SD-02, so the browser talks to one address and the API needs no CORS settings.</li>
+</ul>
+<h2>Execution instructions</h2>
+<p>There is no live demo. The app, the API and the database run on your own machine with Docker:</p>
+<pre><code class="language-bash">git clone https://github.com/VinceVSCode/sd-03-react-fullstack.git
+cd sd-03-react-fullstack
+docker compose up
+</code></pre>
+<p>Then open <strong>http://localhost:8080</strong> and sign in as <code>librarian</code> with the password <code>local-only-demo-password</code>. The demo data (12 books, 4 members, 4 loans) is loaded on the first run. The API's own page is at http://localhost:8000/docs.</p>
+<p><strong>These sign-in values are for a local run only.</strong> They come from <code>.env.example</code>; to change them, copy it to <code>.env</code> and edit the copy. <code>docker compose down</code> stops everything, and <code>docker compose down --volumes</code> also deletes the data.</p>
+<h2>Tech stack</h2>
+<ul>
+<li><strong>React 19</strong> and <strong>TypeScript 7</strong>, built with <strong>Vite</strong>, with <strong>React Router</strong> for the pages.</li>
+<li><strong>React Context with a reducer</strong> for the signed-in user; no state library.</li>
+<li><strong>Vitest</strong> and <strong>React Testing Library</strong>, against a small fake of the SD-02 API.</li>
+<li><strong>oxlint</strong> with the React hooks rules, and <code>tsc</code> for the types.</li>
+<li><strong>nginx</strong> (unprivileged) in <strong>Docker Compose</strong>, with a strict content security policy, and <strong>GitHub Actions</strong> that runs the checks and then the whole stack.</li>
+<li>The <strong>SD-02 API</strong> from its published image, <code>ghcr.io/vincevscode/sd-02-library-api:1.0.1</code>.</li>
+</ul>
+<h2>Challenges and solutions</h2>
+<ul>
+<li><strong>Old answers replacing new ones.</strong> When a librarian moves quickly between pages or searches, a slow answer can arrive after a newer one. Each screen loads its data through one hook that cancels requests no longer needed, so an old answer never replaces a newer one.</li>
+<li><strong>A session timer that sleeps.</strong> A timer does not run while a laptop sleeps, so the session could outlive its 20 minutes. The app also checks the time whenever the tab becomes visible again.</li>
+<li><strong>A token the API refuses.</strong> If the API answers 401 to a request that carried a token, the app signs out, says why, and after the next sign-in returns the librarian to the page they were on.</li>
+<li><strong>Deep links behind nginx.</strong> Opening an address such as <code>/books/3/edit</code> directly failed at first, because the built files were linked relative to that address. They are now linked from the root, and nginx answers every page address with the app.</li>
+<li><strong>Security headers that disappeared.</strong> In nginx, a header set inside one location replaces those set for the whole server, so the content security policy was lost on the cached files. The cache time is now set with <code>expires</code>, which keeps the shared headers.</li>
+<li><strong>Publishing the API image.</strong> The first publish of the SD-02 image was refused at the last step. The package had to give the SD-02 repository write access, and be made public so anyone can pull it.</li>
+</ul>
+<h2>Results</h2>
+<p>The loans, with open, overdue and returned loans, each with its book and member:</p>
+<p><img src="../assets/img/projects/sd-03/demo.png" alt="The Loans page: four loans with book, member, lent and due dates, and the status Returned, Overdue or Out, with a Return button on each open loan."></p>
+<p>Lending a book: the book and the member are chosen by searching, and the due date is shown before lending.</p>
+<p><img src="../assets/img/projects/sd-03/lend.png" alt="The Lend a book form: Frankenstein and the member Giorgos Demo chosen, a loan of 14 days, due on Dec 10, 2026."></p>
+<table>
+<thead>
+<tr>
+<th>Check</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sign-in to sign-out against the real API</td>
+<td>works in the browser, through nginx and in development</td>
+</tr>
+<tr>
+<td>Automated tests</td>
+<td>90 pass: the API client, the session, and every screen's loading, error and empty states</td>
+</tr>
+<tr>
+<td>Whole stack</td>
+<td><code>docker compose up</code> passes all 8 outside checks, locally and in CI</td>
+</tr>
+<tr>
+<td>Lint and types</td>
+<td>oxlint and <code>tsc</code> with no warnings</td>
+</tr>
+</tbody>
+</table>
+<h2>What I learned</h2>
+<p>Coming soon.</p>
+
+  </div>
+
+  <ul class="card-links case-study-links">
+    <li><a href="../projects/">Back to all projects</a></li>
+    <li><a href="https://github.com/VinceVSCode/sd-03-react-fullstack" target="_blank" rel="noopener noreferrer">Source repository<span class="visually-hidden">: React Full-Stack Mini App</span></a></li>
+  </ul>
+</article>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>&copy; Themis Sarafidis. Code licence: MIT. Content licence: CC BY 4.0.</p>
+      <p>This site uses no trackers and no analytics.</p>
+    </div>
+  </footer>
+  <script type="module" src="../assets/js/lightbox.js"></script>
+</body>
+</html>
