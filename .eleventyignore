@@ -1,4 +1,8 @@
+# Files and folders Eleventy must NOT treat as pages. Same syntax as .gitignore.
+# Root Markdown files (README.md, requirements.md) are documentation, not pages.
 ./*.md
+# Folders that are not pages: docs, demo folders (copied as they are), static
+# assets, build scripts, and the manifest cache.
 docs/
 demos/
 assets/
