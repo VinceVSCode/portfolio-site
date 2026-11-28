@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' https://api.github.com; img-src 'self' data:; object-src 'none'; base-uri 'self'; form-action 'none'">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta name="robots" content="noindex">
+  <title>Library REST API with Database | Themis Sarafidis</title>
+  <meta name="description" content="A REST API for a small library: books, members and loans in PostgreSQL, with validation, paging, token login and an OpenAPI page.">
+  <meta property="og:title" content="Library REST API with Database | Themis Sarafidis">
+  <meta property="og:description" content="A REST API for a small library: books, members and loans in PostgreSQL, with validation, paging, token login and an OpenAPI page.">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Themis Sarafidis">
+  <link rel="stylesheet" href="../assets/css/site.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="site-name" href="../">Themis Sarafidis</a>
+      <nav aria-label="Main">
+        <ul class="nav-list">
+          <li><a href="../">Home</a></li>
+          <li><a href="../projects/">Projects</a></li>
+          <li><a href="../demos/">Demos</a></li>
+          <li><a href="../assets/files/themis-sarafidis-cv.pdf" download>CV (PDF)</a></li>
+          <li><a href="../#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <main id="main" class="wrap">
+    <article class="case-study">
+  <p><a href="../projects/">&larr; All projects</a></p>
+  <h1>Library REST API with Database</h1>
+  <p class="lead">A REST API for a small library: books, members and loans in PostgreSQL, with validation, paging, token login and an OpenAPI page.</p>
+  <p class="status status-complete">Complete</p>
+  <ul class="tags" aria-label="Technologies">
+    <li>Python</li>
+    <li>REST APIs</li>
+    <li>SQL</li>
+    <li>PostgreSQL</li>
+    <li>Authentication</li>
+    <li>Docker</li>
+    <li>Alembic</li>
+  </ul>
+
+  <div class="prose">
+    <h2>Problem</h2>
+<p>A small library needs to keep its catalogue, its members and its loans in one place, and other programs need to reach that data safely. The aim of this project was a small but complete REST API with a real relational database behind it. Its rules must hold even when two requests arrive at the same moment: a book cannot be lent twice, and a book or member with loans cannot be deleted.</p>
+<h2>Approach</h2>
+<ul>
+<li><strong>Schema first.</strong> Four tables: books, members, loans and librarians. The rules that must never break live in PostgreSQL: unique ISBNs and emails, foreign keys that block deleting a book or member with loans, check constraints on the dates, and a partial unique index that allows only one open loan per book.</li>
+<li><strong>Resources and status codes.</strong> One module per resource. Lists are paged and searchable. Answers use 401, 404, 409 and 422, each with a message that names the problem.</li>
+<li><strong>Validation at the edge.</strong> ISBNs are checked by their check digit and stored as 13 digits, emails are stored in lower case, and unknown fields are refused.</li>
+<li><strong>Login.</strong> Passwords are stored as salted scrypt hashes. A login returns a signed token (JWT) that expires after 30 minutes. Reading books is public; everything else needs the token.</li>
+<li><strong>One command to run.</strong> Docker Compose starts PostgreSQL and the API, and the API applies the migrations itself before it starts.</li>
+</ul>
+<h2>Execution instructions</h2>
+<p>There is no live demo. The API runs on your own machine with Docker, in the cloned project folder:</p>
+<pre><code class="language-bash">cp .env.example .env            # Windows: copy .env.example .env
+docker compose up --build
+</code></pre>
+<p>In a second terminal, add the demo data (a librarian, 12 books, 4 members and 4 loans):</p>
+<pre><code class="language-bash">docker compose exec api python scripts/seed.py
+</code></pre>
+<p>Then open <strong>http://localhost:8000/docs</strong>, press <strong>Authorize</strong>, and log in with <code>DEMO_USERNAME</code> and <code>DEMO_PASSWORD</code> from <code>.env</code>. Every endpoint can be tried from that page.</p>
+<p><strong><code>.env</code> holds values for a local run only.</strong> Replace the passwords and <code>JWT_SECRET</code> before any other use. To stop, press Ctrl+C; <code>docker compose down --volumes</code> also deletes the data.</p>
+<h2>Tech stack</h2>
+<ul>
+<li><strong>Python 3.12+</strong> with <strong>FastAPI</strong>, which builds the OpenAPI page from the code, and <strong>Pydantic</strong> for validation.</li>
+<li><strong>PostgreSQL 18</strong> through <strong>SQLAlchemy</strong>, with <strong>Alembic</strong> migrations.</li>
+<li><strong>PyJWT</strong> for the tokens; <strong>scrypt</strong> from the standard library for the passwords.</li>
+<li><strong><code>pytest</code></strong> and <strong><code>ruff</code></strong>; the tests run on SQLite by default and on PostgreSQL in CI.</li>
+<li><strong>Docker Compose</strong>, and <strong>GitHub Actions</strong> that starts the whole stack on every push.</li>
+</ul>
+<h2>Challenges and solutions</h2>
+<ul>
+<li><strong>Two requests at once.</strong> A check in the code alone (&quot;is this book already lent?&quot;) can be passed by two requests at the same moment. The database's partial unique index refuses the second loan anyway, and the API turns that refusal into the same clear 409 answer. A test writes straight to the database to prove it.</li>
+<li><strong>Tests without Docker.</strong> The tests build their database with the real migrations, on a temporary SQLite file, so <code>pytest</code> works on a fresh clone. CI runs the same tests on PostgreSQL, the real database.</li>
+<li><strong>A database that does not answer.</strong> At first a request hung when PostgreSQL was down. A 5-second connection timeout fixed it: <code>/health</code> now answers 503 within about 3 seconds.</li>
+<li><strong>Not revealing usernames.</strong> An unknown username takes as long to refuse as a wrong password, so the answer time gives nothing away.</li>
+<li><strong>Found in review.</strong> Ids too large for PostgreSQL and text with a NUL character crashed requests with a 500 error, and <code>%</code> in a search matched everything. Version 1.0.1 refuses such input with a clear 422 answer and searches as plain text.</li>
+</ul>
+<h2>Results</h2>
+<p>A session with the running API: a request without a token is refused, a book is lent, lending it again is refused with 409, and the loan is returned.</p>
+<p><img src="../assets/img/projects/sd-02/demo.png" alt="Terminal session with the API: 401 without a token, a login, a loan created with 201, the same loan refused with 409, and the return."></p>
+<table>
+<thead>
+<tr>
+<th>Check</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Tests</td>
+<td>191 pass, on SQLite and on PostgreSQL 18</td>
+</tr>
+<tr>
+<td>Protected endpoints</td>
+<td>each of the 12 refuses a missing or forged token (401)</td>
+</tr>
+<tr>
+<td>Whole stack</td>
+<td><code>docker compose up</code> passes all 7 outside checks, locally and in CI</td>
+</tr>
+<tr>
+<td>Database down</td>
+<td><code>/health</code> answers 503 within about 3 seconds</td>
+</tr>
+</tbody>
+</table>
+<p><img src="../assets/img/projects/sd-02/tests.png" alt="Test run: 191 tests passed."></p>
+<h2>What I learned</h2>
+<p>How to set up a database, create a schema, create the rules, the routing and the controllers for the REST API. There are many alternative user authentication methods; tokens are the bare minimum. Create the relationships for the database. Create a basic login role, &quot;the librarian&quot;. Test in different scenarios whether the API is well protected.</p>
+
+  </div>
+
+  <ul class="card-links case-study-links">
+    <li><a href="../projects/">Back to all projects</a></li>
+    <li><a href="https://github.com/VinceVSCode/sd-02-library-api" target="_blank" rel="noopener noreferrer">Source repository<span class="visually-hidden">: Library REST API with Database</span></a></li>
+  </ul>
+</article>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>&copy; Themis Sarafidis. Code licence: MIT. Content licence: CC BY 4.0.</p>
+      <p>This site uses no trackers and no analytics.</p>
+    </div>
+  </footer>
+  <script type="module" src="../assets/js/lightbox.js"></script>
+</body>
+</html>
